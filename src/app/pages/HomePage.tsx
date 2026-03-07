@@ -4,7 +4,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { ServicesTicker } from "../components/ServicesTicker";
 import { CtaPair } from "../components/CtaPair";
-import ampersandWhite from "figma:asset/08c44e824fc6b0a553c3e2a047c8e46590fd9978.png";
+import ampersandWhite from "../../assets/ampersand-white.png;
 
 export function HomePage() {
   useEffect(() => {
