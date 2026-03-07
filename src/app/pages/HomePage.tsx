@@ -4,8 +4,8 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { ServicesTicker } from "../components/ServicesTicker";
 import { CtaPair } from "../components/CtaPair";
-import { ampersandWhite }from "../../assets/ampersand-white.png";
-import { logoStacked } from "../../assets/logo-stacked.png";
+import ampersandWhite from "../../assets/ampersand-white.png";
+import logoStacked from "../../assets/logo-stacked.png";
 
 export function HomePage() {
   useEffect(() => {
@@ -714,8 +714,7 @@ export function HomePage() {
               }}
             >
              <img
-               src={logoStacked}
-               alt="Thompson & Co Brand Mark"
+                src={logoStacked}
                 alt="Thompson & Co Brand Mark"
                 style={{
                   width: '120%',
