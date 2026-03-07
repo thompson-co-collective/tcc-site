@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react';
-import ampersandWhite from 'figma:asset/08c44e824fc6b0a553c3e2a047c8e46590fd9978.png';
+import ampersandWhite from "../../assets/ampersand-white.png";
 
 // Lazy load confetti
 const loadConfetti = () => import('canvas-confetti');
