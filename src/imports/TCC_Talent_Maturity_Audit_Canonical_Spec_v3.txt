@@ -1,0 +1,171 @@
+TCC Talent Maturity Audit - Canonical Spec v3
+Executive + TA Leadership build brief (Figma Make + Web + HubSpot + GA4)
+Date: 2026-02-26
+1. Executive Summary
+This document is the canonical build + UX + measurement spec for the Talent Maturity Audit. It preserves the original high-performing single-flow audit experience (wizard, segmented scoring, local save/restore, and confetti completion moment) while integrating the v2 strategy refinements: AI-first impressions, spend/conversion fragility, and proof-led credibility.
+2. Non-Negotiables (Preserve the Initial Structure)
+* Single-flow staged wizard (Intro ? Questions ? Submit/Validate ? Results).
+* 13 statements; each scored 0 / 1 / 2 via segmented controls (not radio buttons).
+* Confetti fires ONLY after a valid submit and score computation; paired microcopy: "Baseline established."
+* Local persistence: auto-save each answer to localStorage; restore on reload; explicit "Clear saved answers".
+* Results-first: show score + band immediately (no gating before results).
+* Email capture occurs AFTER results and is optional (Model A).
+3. Information Architecture & URL Recommendation
+Recommendation for MVP: keep the audit on the primary domain path to minimize friction and tracking complexity.
+Preferred: https://thompsoncollective.co/audit
+Why: preserves same-site cookies, simplest GA4 + HubSpot continuity, fewer cross-domain edge cases, and less perceived "handoff" risk for users. A subdomain (e.g., talentaudit.thompsoncollective.co) is viable, but it adds cross-domain tracking setup and introduces an extra trust/latency point.
+If you still choose a subdomain, required mitigations:
+* Implement GA4 cross-domain measurement (same GA4 property; allow linker between root + subdomain).
+* Ensure HubSpot tracking cookie continuity or accept split session attribution.
+* Mirror brand header/footer to avoid a perceived context switch.
+* Enforce HTTPS + consistent canonical tags; avoid duplicate indexing.
+4. Funnel & Measurement Model (MVP)
+One funnel. Three meaningful signals.
+* Signal 1 - Audit Engagement: CTA2 click from homepage hero or internal links.
+* Signal 2 - Audit Completion: Audit submit with computed score + band (confetti moment).
+* Signal 3 - High Intent: Calendly session scheduled (or at minimum, Calendly click).
+5. Events & Parameters (GA4 / GTM or equivalent)
+EventWhen it firesParametersNotesaudit_cta_clickUser clicks "Take the Talent Audit" (homepage hero CTA2 or other)page, location, cta_nameKeep consistent naming across placements.talent_maturity_audit_submittedUser clicks submit; all 13 answered; score computedaudit_score, maturity_band, pageTrigger confetti here.audit_email_captureUser enters email after results and clicks sendaudit_score, maturity_band, pageOptional; do not gate results.calendly_clickUser clicks "Book a 30-minute..." from resultspage, locationTrack reliably.calendly_scheduledCalendly scheduled confirmation capturedevent_type, pageOptional if reliably detectable.6. Scoring Model (Locked)
+Each question scored 0/1/2. Total = 0-26.
+Score RangeBand0-7Nascent8-14Developing15-20Aligned21-26OptimizedOptional sub-scores (recommended, no UX change):
+* Strategy & Ownership: Q1-Q2
+* Narrative & Proof: Q3-Q6
+* Visibility & AI First Impressions: Q7-Q9
+* Recruitment Marketing Governance: Q10-Q11
+* Candidate Experience & Measurement: Q12-Q13
+7. The 13 Audit Questions (Canonical Text)
+Q1. We have defined 12-18 month hiring priorities tied to business strategy, and we review them quarterly.
+Q2. We have identified mission-critical roles (role families) and documented what "qualified" means beyond requirements (skills, traits, dealbreakers).
+Q3. We have a documented EVP informed by real employee/candidate insight (not leadership-only).
+Q4. Our talent narrative is governed: recruiters and hiring leaders communicate the same core story consistently.
+Q5. Our EVP claims are evidence-backed (proof points mapped), and we can defend them across channels.
+Q6. We monitor "message-reality drift" (where candidate experience contradicts the promise) and adjust narrative or operations accordingly.
+Q7. We have an always-on content engine beyond job postings and publish on a defined cadence.
+Q8. Our careers site and priority job content have been updated within 12 months and are structured to convert (clarity, scannability, mobile).
+Q9. We actively manage AI-era first impressions: what candidates find in search/AI/review platforms is consistent with our intended narrative (SEO/GEO/AEO basics in place).
+Q10. We know which channels drive qualified hires by role family, and we reallocate budget/effort based on performance.
+Q11. We have job ad governance (message consistency, inclusive language, quality control) and treat job ads as "claims" that must match EVP.
+Q12. We track apply flow friction, candidate communication SLAs, and candidate feedback - and we act on it.
+Q13. We have baseline funnel analytics (source quality, conversion, time-to-decision, offer acceptance) and use the data to decide what changes next.
+8. Results Output (Band Copy + Priorities + CTA)
+Results panel order (keep): Score+Band ? What this means ? 3 priorities ? CTA ? Email capture module.
+Primary CTA label (sitewide for this flow): "Book a 30-minute Talent Maturity Audit Discussion"
+Band Copy (MVP)
+Nascent (0-7)
+Hiring is happening, but the system is informal. Outcomes feel inconsistent and hard to diagnose.
+Top 3 priorities:
+* Establish an EVP-lite: 3-5 defensible claims + proof.
+* Fix conversion choke points (job clarity + apply flow) before adding spend.
+* Stand up one always-on channel with a weekly publishing cadence.
+Developing (8-14)
+Pieces exist, but consistency and accountability are weak across channels and leaders.
+Top 3 priorities:
+* Govern narrative across recruiters + hiring leaders; standardize job ad claims.
+* Implement clean baselines by role family (source quality + conversion).
+* Turn EVP themes into proof-led assets (specificity beats "culture language").
+Aligned (15-20)
+You have a coherent foundation; performance is limited by optimization loops and scale discipline.
+Top 3 priorities:
+* Optimize funnel: apply starts?completes, time-to-decision, offer?accept.
+* Scale distribution: coordinate paid/owned/earned to reduce channel waste.
+* Tighten AI/search/review footprint to reduce narrative drift.
+Optimized (21-26)
+Strong governance + measurement. The opportunity is scale, resilience, and defensibility.
+Top 3 priorities:
+* Expand role-family segmentation (message + channel strategy).
+* Operationalize narrative defense (monitoring + response playbook).
+* Run a quarterly improvement cadence with benchmarks and decisions.
+9. Post-Results Email Capture (Model A - Locked)
+Goal: preserve the 'free tool' feel while allowing users to send results to themselves. Do not gate results.
+Placement: directly beneath the results panel; do not interrupt confetti moment.
+Fields: Email only.
+Suggested microcopy:
+Headline: "Want a copy of your results + recommended next steps?"
+Helper: "No spam. This is just your score and what to do next."
+Button: "Send my results"
+Success: "Sent. Check your inbox."
+10. Notes for Web Designer (UI/UX)
+* Maintain the existing audit visual language: editorial, calm, minimal; avoid "quiz app" styling.
+* Keep the wizard compact: one primary column, generous whitespace, short line length.
+* Segmented controls must be obvious and tappable on mobile (min 44px height).
+* Provide persistent progress indicator: "Question 4 of 13" + subtle bar (no heavy gamification).
+* Validation should be calm: if unanswered questions remain, highlight them inline and scroll to first missing.
+* Confetti moment: lightweight and brief; keep as celebration of completion, not novelty.
+* Results panel: prioritize scannability-Band label, then 3 priorities in bullets, then CTA.
+* Email capture module: visually secondary (under results) but not hidden; keep one field only.
+* Accessibility: ensure contrast, focus states, keyboard navigation for segmented controls, and reduced motion support.
+11. Notes for Developer (Implementation)
+* Route: /audit (same domain). Ensure homepage CTA2 links to this route (already in HomePage TSX).
+* State model: answers array length 13; values 0/1/2; compute score on submit.
+* Persistence: localStorage key 'tcc_audit_v3'; save on every change; restore on mount; provide clear/reset.
+* Validation: require all answered before submit; track missing indices; focus/scroll to first missing.
+* Events: fire talent_maturity_audit_submitted on successful submit with params audit_score + maturity_band.
+* Email capture: post-results; call HubSpot form/API or backend endpoint; also fire audit_email_capture event.
+* Calendly: track click reliably; scheduling event optional unless confirmed via redirect/webhook.
+* SEO: noindex optional while testing; remove at launch; ensure canonical and OpenGraph tags.
+* Performance: avoid large animation bundles; confetti library should be lightweight and lazy-loaded.
+* Privacy: confirm that audit data stored locally is minimal; disclose via brief note if needed.
+12. Figma Make Prompt (Copy/Paste)
+You are Figma Make building an embedded "Talent Maturity Audit" page for Thompson & Co Collective.
+
+GOAL
+Create a single-flow staged wizard audit that takes 4-6 minutes, delivers instant results (score + maturity band + 3 priorities), preserves an editorial enterprise aesthetic, and includes optional email capture AFTER results.
+
+ROUTE + CONTEXT
+This page will live at /audit on thompsoncollective.co and will be linked from the homepage hero CTA2 ("Take the Talent Audit"). Keep UX consistent with the existing site: teal/navy restrained palette, Newsreader/Inter style pairing, calm motion, minimal UI.
+
+NON-NEGOTIABLE UX
+- Wizard flow: Intro ? 13 Questions ? Submit/Validate ? Results.
+- Each question uses segmented controls for 0/1/2 (not radios).
+- Auto-save answers to localStorage and restore on reload. Provide "Clear saved answers."
+- Submit button triggers validation; on success: compute score, assign band, fire confetti for ~1.2s, show microcopy "Baseline established." then reveal Results panel.
+- Results shown immediately (no gating). Email capture appears under results and is optional.
+
+SCORING
+Each answer: 0 / 1 / 2. Total 0-26.
+Bands:
+0-7 Nascent
+8-14 Developing
+15-20 Aligned
+21-26 Optimized
+
+QUESTIONS (13)
+1) We have defined 12-18 month hiring priorities tied to business strategy, and we review them quarterly.
+2) We have identified mission-critical roles (role families) and documented what "qualified" means beyond requirements (skills, traits, dealbreakers).
+3) We have a documented EVP informed by real employee/candidate insight (not leadership-only).
+4) Our talent narrative is governed: recruiters and hiring leaders communicate the same core story consistently.
+5) Our EVP claims are evidence-backed (proof points mapped), and we can defend them across channels.
+6) We monitor "message-reality drift" (where candidate experience contradicts the promise) and adjust narrative or operations accordingly.
+7) We have an always-on content engine beyond job postings and publish on a defined cadence.
+8) Our careers site and priority job content have been updated within 12 months and are structured to convert (clarity, scannability, mobile).
+9) We actively manage AI-era first impressions: what candidates find in search/AI/review platforms is consistent with our intended narrative (SEO/GEO/AEO basics in place).
+10) We know which channels drive qualified hires by role family, and we reallocate budget/effort based on performance.
+11) We have job ad governance (message consistency, inclusive language, quality control) and treat job ads as "claims" that must match EVP.
+12) We track apply flow friction, candidate communication SLAs, and candidate feedback - and we act on it.
+13) We have baseline funnel analytics (source quality, conversion, time-to-decision, offer acceptance) and use the data to decide what changes next.
+
+RESULTS CONTENT
+For each band, show:
+- One-sentence meaning
+- "Top 3 priorities" bullets
+- Primary CTA button: "Book a 30-minute Talent Maturity Audit Discussion" linking to Calendly (or your /contact scheduling path)
+- Under results: Email capture module (Email only) with copy:
+  Headline: "Want a copy of your results + recommended next steps?"
+  Helper: "No spam. This is just your score and what to do next."
+  Button: "Send my results"
+  Success: "Sent. Check your inbox."
+
+ANALYTICS HOOKS
+Prepare event hooks (no need to implement GTM here, just placeholders):
+- audit_cta_click
+- talent_maturity_audit_submitted (include score + band)
+- audit_email_capture
+- calendly_click
+
+ACCESSIBILITY + QUALITY
+- 44px tap targets, visible focus states, prefers-reduced-motion support, strong contrast.
+- No unnecessary animations; keep it calm and premium.
+
+13. Homepage CTA2 Integration Note (Awareness)
+Your HomePage TSX already routes CTA2 to '/audit'. Maintain this path naming consistently across the router and nav. Avoid mixing '/our-approach' and '/approach' routes; standardize slugs to prevent 404s and analytics fragmentation.
+End of spec.

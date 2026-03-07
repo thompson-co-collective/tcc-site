@@ -1,0 +1,125 @@
+THOMPSON & CO COLLECTIVE
+Privacy Policy
+thompsonco.com
+Effective Date: March 1, 2026  ·  Last Updated: March 1, 2026
+
+
+PLAIN LANGUAGE COMMITMENT
+We've written this policy to be readable — not to bury the important parts. If you have questions about anything here, email us directly at hello@thompsonco.com.
+
+This Privacy Policy explains how Thompson & Co Collective ("we," "us," or "our") collects, uses, and protects information when you visit thompsonco.com, use our tools, or engage with us directly. It applies to all visitors, regardless of location, with specific additional rights for California residents noted in Section 9.
+1. Who We Are
+Thompson & Co Collective is a boutique employer brand and recruitment marketing consultancy based in Lake Norman, North Carolina. We work with organizations to align their employer brand, recruitment marketing, and candidate experience.
+Mailing address: Lake Norman, NC
+Contact: hello@thompsonco.com
+2. What We Collect and Why
+We only collect information that serves a clear purpose. Here is what we collect, how, and why.
+Information you give us directly
+–	Contact form submissions — your name, email address, company name, and any message you choose to send. We use this to respond to your inquiry.
+–	Talent Maturity Audit responses — your answers to the 13-question self-assessment. We use this to provide your results and, if you opt in, to follow up with relevant resources.
+–	Newsletter and blog subscriptions — your email address. We use this to send you content you've asked for. You can unsubscribe at any time.
+–	Calendly bookings — your name, email, and scheduling information when you book a meeting through our Calendly link. Calendly's own privacy policy also applies to this data.
+Information collected automatically
+–	Usage data — pages visited, time on page, referring URL, browser type, and device type. Collected via Google Analytics.
+–	Interaction data — how you move through and engage with the site. Collected via Google Analytics and Meta Pixel.
+–	Cookies — small text files placed on your device that help us understand how visitors use the site. See Section 5 for full cookie details.
+Information we do not collect
+We do not collect sensitive personal information such as Social Security numbers, financial account information, health data, or government ID numbers. We do not knowingly collect information from anyone under the age of 18.
+3. How We Use Your Information
+We use the information we collect for the following purposes:
+–	To respond to your inquiries and service requests
+–	To deliver the Talent Maturity Audit results and any follow-up resources you've requested
+–	To send newsletters or blog content you've subscribed to
+–	To schedule meetings you've initiated through Calendly
+–	To understand how visitors use our site so we can improve it
+–	To measure the performance of our content and outreach
+–	To fulfill legal obligations if required
+
+We do not sell your information. We do not use your information to make automated decisions that have legal or significant effects on you.
+4. How We Share Your Information
+We share information only where necessary to operate our business. The third parties we work with are:
+Google Analytics
+We use Google Analytics to understand site traffic and visitor behavior. Google may receive usage data including IP address (anonymized where possible), pages visited, and device information. Google's privacy policy governs their use of this data. You can opt out of Google Analytics tracking at tools.google.com/dlpage/gaoptout.
+Meta Pixel
+We use Meta Pixel to measure the effectiveness of our content and understand how visitors interact with the site after engaging with our presence on Meta platforms (Facebook, Instagram). Meta may receive page visit data and interaction events. Meta's data policy governs their use of this data.
+HubSpot
+We use HubSpot as our CRM and email marketing platform. Information submitted through our contact form, newsletter signup, and audit tool may be stored in HubSpot. HubSpot's privacy policy governs their handling of this data.
+Calendly
+When you book a meeting through our Calendly link, your scheduling information is processed by Calendly. Calendly's privacy policy governs their handling of this data.
+Gmail / Google Workspace
+Direct email correspondence is managed through Google Workspace. Google's privacy policy governs their handling of email data.
+Legal requirements
+We may disclose your information if required by law, court order, or governmental authority — or if we believe disclosure is necessary to protect the rights, property, or safety of Thompson & Co Collective, our clients, or others.
+
+WHAT WE DO NOT DO
+We do not sell your personal information to third parties. We do not share your information with advertisers for their own marketing purposes. We do not use your data for AI model training.
+5. Cookies
+Cookies are small text files stored on your device when you visit a website. We use the following types of cookies:
+Essential cookies
+Required for the site to function. These cannot be disabled. They include session management and security cookies.
+Analytics cookies
+Used to understand how visitors interact with the site. Includes Google Analytics cookies (_ga, _gid, _gat). These cookies do not identify you personally — they track aggregated behavior across all visitors.
+Marketing cookies
+Used to measure content performance. Includes the Meta Pixel cookie (_fbp). This cookie helps us understand whether visitors who engaged with our Meta presence later visited our site.
+Managing cookies
+You can control cookies through your browser settings. Most browsers allow you to block or delete cookies. Note that blocking essential cookies may affect site functionality. You can also opt out of Google Analytics tracking at tools.google.com/dlpage/gaoptout and manage Meta cookie preferences through your Facebook settings.
+6. Data Retention
+We retain your information only as long as necessary for the purpose it was collected or as required by law.
+–	Contact form submissions and direct correspondence — retained for the duration of our business relationship plus 3 years.
+–	Talent Maturity Audit responses — retained for 12 months unless you request deletion sooner.
+–	Newsletter and blog subscriptions — retained until you unsubscribe.
+–	Analytics data — governed by Google Analytics and Meta retention settings, typically 14–26 months.
+–	CRM records in HubSpot — retained for the duration of our business relationship plus 3 years.
+7. Data Security
+We take reasonable technical and organizational measures to protect your information from unauthorized access, disclosure, or loss. These measures include:
+–	Secure HTTPS connection across the entire site
+–	Access controls limiting who within our team can view collected data
+–	Use of reputable, security-certified third-party platforms (Google, HubSpot, Meta, Calendly)
+
+No method of transmission over the internet is completely secure. While we work to protect your information, we cannot guarantee absolute security. If you believe your information has been compromised, contact us immediately at hello@thompsonco.com.
+8. Your Rights
+Regardless of your location, you have the right to:
+–	Request access to the personal information we hold about you
+–	Request correction of inaccurate information
+–	Request deletion of your information, subject to legal retention requirements
+–	Withdraw consent for email communications at any time by unsubscribing
+–	Ask questions about how your data is used
+
+To exercise any of these rights, email us at hello@thompsonco.com. We will respond within 30 days.
+9. California Residents — Your Additional Rights (CCPA)
+If you are a California resident, the California Consumer Privacy Act (CCPA) grants you specific rights regarding your personal information.
+Your CCPA rights
+–	Right to know — you may request disclosure of the categories and specific pieces of personal information we have collected about you in the past 12 months, the sources of that information, the business purpose for collecting it, and the categories of third parties with whom we share it.
+–	Right to delete — you may request deletion of personal information we have collected about you, subject to certain exceptions (such as information needed to complete a transaction or comply with a legal obligation).
+–	Right to opt out of sale — we do not sell personal information. This right is satisfied by our existing practice.
+–	Right to non-discrimination — we will not discriminate against you for exercising any of your CCPA rights. Exercising your rights will not affect the quality of service you receive from us.
+How to submit a CCPA request
+Email hello@thompsonco.com with the subject line 'California Privacy Request' and describe your request. We will verify your identity before processing and respond within 45 days. If we need additional time (up to 90 days total), we will notify you in writing.
+Authorized agents
+California residents may designate an authorized agent to make a request on their behalf. We will require written authorization from you and may verify your identity directly before processing the request.
+Categories of personal information collected
+In the past 12 months, we have collected the following categories of personal information as defined by the CCPA:
+–	Identifiers — name, email address, IP address
+–	Commercial information — service inquiries and engagement history
+–	Internet or other electronic network activity — usage data, pages visited, interaction data
+–	Geolocation data — approximate location derived from IP address
+
+We have not collected sensitive personal information as defined by the CCPA.
+10. Third-Party Links
+Our site may contain links to third-party websites — including LinkedIn, and resources we reference in our content. We are not responsible for the privacy practices of those sites. We encourage you to review their privacy policies before providing any personal information.
+11. Children's Privacy
+Our site is not directed to children under the age of 18. We do not knowingly collect personal information from anyone under 18. If you believe we have inadvertently collected information from a minor, contact us immediately at hello@thompsonco.com and we will delete it promptly.
+12. Changes to This Policy
+We may update this Privacy Policy from time to time to reflect changes in our practices, tools, or legal requirements. When we do, we will update the 'Last Updated' date at the top of this page. Material changes will be noted clearly. We encourage you to review this policy periodically.
+Continued use of our site after changes are posted constitutes your acknowledgment of the updated policy.
+13. Contact Us
+If you have questions, concerns, or requests regarding this Privacy Policy or how we handle your information, contact us directly:
+
+Thompson & Co Collective
+Lake Norman, North Carolina
+hello@thompsoncollective.co
+thompsoncollective.co
+
+
+Thompson & Co Collective  ·  thompsoncollective.co ·  hello@thompsoncollective.co
+© 2026 Thompson & Co Collective. All rights reserved.

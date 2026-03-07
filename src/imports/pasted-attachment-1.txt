@@ -1,0 +1,32 @@
+CONTEXT: You are refining the Thompson & Co Collective website prototype. Apply the following system-level harmonizations across the Information Architecture, Content, and Design System. Maintain the established nautical color palette (Navy #0A1220 and Teal #0E5A6A / #117C92) and the typography pairing (Playfair Display and Inter).
+Execute the following updates across all pages:
+1. GLOBAL NAVIGATION & IA UPDATES
+Header Component (GlobalHeader): Find the main navigation link labeled "Blog" and rename it to "Insights".
+Header Component (GlobalHeader): Add a "Partner" link to the main desktop navigation and the mobile hamburger menu (it currently only exists in the footer).
+2. CTA TEXT HARMONIZATION
+Global Search & Replace: Search across all pages (Home, About, Capabilities, Our Approach) for any secondary CTA buttons or text links currently reading "Take the Free Audit", "Take the Talent Audit", or "Take the Talent Maturity Audit".
+Update Text: Change all of these instances to read exactly: "Get your baseline →"
+Note: Do not change the visual styling of these buttons or links, only the text content.
+3. CALLOUT BOX STANDARDIZATION
+Component Update: Standardize all "Callout Box" or "Highlight" components across the site to use the strict left-border editorial style.
+Style Specs: Set the background color to very light teal (#F0F9FA). Apply a left border of 3px solid #117C92. Set padding to 28px 28px 28px 32px and border-radius to 4px.
+Cleanup: Remove any legacy callout boxes that use a "top-accent" border style to ensure 100% component consistency.
+4. LINK MICRO-INTERACTIONS
+Inline Links & Cards: Ensure all inline text links and the Homepage Market Reality cards use the standardized premium micro-interaction.
+Interaction Specs: On hover, the link opacity should shift from 100% to 85%, text-decoration adds an underline, and the arrow (→) shifts 1px to the right.
+Animation Specs: Use a transition duration of 140ms with easing cubic-bezier(0.25, 0.1, 0.25, 1).
+5. TALENT AUDIT RESULTS UI
+Page: Navigate to the /audit Results Stage UI.
+Component: Locate the "System Snapshot" section.
+Text Update: Change the subtitle to read: "What’s strong vs. where opportunity exists across the systems that drive hiring outcomes."
+Status Pills: Change any red/warning status pills currently reading "Needs attention" to read "Opportunity" (or "Where opportunity exists").
+6. AMPERSAND WATERMARK GOVERNANCE
+Visual Cleanup: Review all standard 2x2 and 3x3 content grids (like the Capabilities cards or Principles cards). If the large Serif Ampersand (&) watermark is used as a background graphic inside these standard cards, remove it.
+Governance: Restrict the Ampersand watermark strictly to major architectural moments: the Homepage Hero, the About Page "Our Philosophy" section, and the bottom "Ready to Move Forward?" CTA bands. Where it is used, ensure opacity is kept extremely subtle at 3% to 5% (0.03 - 0.05).
+
+--------------------------------------------------------------------------------
+💡 Specific Details to Share with Your Designer
+If your designer is running these prompts, you may want to pass along these specific context notes from the documentation:
+Why we are removing "Free": The word "Free" violates the "no hype" enterprise editorial rule. Enterprise buyers respond better to diagnostic language like "baseline."
+Why we are standardizing Callouts: The prototype specs mentioned two different styles (top-accent vs. left-border). Standardizing to the left-border pattern (#F0F9FA background with #117C92 border) maintains the "calm authority" aesthetic and reduces component bloat.
+Why we are moving the Partner page: Burying the Partner page in the footer creates unnecessary friction for a core revenue stream audience. Adding it to the main GlobalHeader solves this
