@@ -1,4 +1,4 @@
-  {
+{
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "thompsoncollective-site",
   "compatibility_date": "2025-09-27",
@@ -7,9 +7,9 @@
   },
   "assets": {
     "directory": "./dist",
-    "binding": "ASSETS",
     "not_found_handling": "single-page-application"
   },
   "compatibility_flags": [
     "nodejs_compat"
-  ]}
+  ]
+}
