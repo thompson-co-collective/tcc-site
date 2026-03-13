@@ -44,7 +44,7 @@ export function GlobalHeader() {
   }, [mobileMenuOpen]);
 
   // Navigation structure
-   const navLinks = [
+  const navLinks = [
     { label: "Capabilities", path: "/capabilities" },
     { label: "Approach", path: "/our-approach" },
     { label: "About", path: "/about" },
@@ -89,7 +89,7 @@ export function GlobalHeader() {
                   className="truncate"
                   style={{
                     fontFamily: 'Georgia, serif',
-                    fontSize: '20px',
+                    fontSize: '18px',
                     fontWeight: 'normal',
                     color: '#FFFFFF',
                     maxWidth: 'calc(100vw - 200px)', // Leave room for CTA + hamburger on mobile
@@ -100,77 +100,80 @@ export function GlobalHeader() {
               </Link>
             </div>
 
-            {/* Desktop Navigation - Center */}
-            <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
+            {/* Right Group: Desktop Navigation + CTA + Hamburger */}
+            <div className="flex items-center gap-5">
+              {/* Desktop Navigation - Right aligned with CTA */}
+              <div className="hidden lg:flex items-center gap-5">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`transition-all duration-200 ${
+                      isActive(link.path) 
+                        ? 'text-white border-b-2 border-[#117C92]' 
+                        : 'text-white/80 hover:text-white'
+                    }`}
+                    style={{ 
+                      fontFamily: 'Arial, sans-serif',
+                      fontSize: '12px',
+                      fontWeight: 'normal',
+                      paddingBottom: '2px',
+                    }}
+                    aria-current={isActive(link.path) ? "page" : undefined}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              {/* CTA + Hamburger Container */}
+              <div className="flex items-center gap-3">
+                {/* CTA - Always Visible */}
                 <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`transition-all duration-200 ${
-                    isActive(link.path) 
-                      ? 'text-white border-b-2 border-[#117C92]' 
-                      : 'text-white/80 hover:text-white'
-                  }`}
+                  to="/contact"
+                  className="px-4 lg:px-6 py-2 rounded text-white transition-all hover:shadow-2xl hover:scale-105 relative group overflow-hidden"
                   style={{ 
-                    fontFamily: 'Arial, sans-serif',
-                    fontSize: '14px',
-                    fontWeight: 'normal',
-                    paddingBottom: '2px',
+                    minHeight: '44px',
+                    background: 'linear-gradient(135deg, #117C92, #0E5A6A)',
+                    boxShadow: '0 8px 24px rgba(17,124,146,.35)',
+                    fontFamily: 'var(--font-serif)',
+                    fontWeight: 600,
+                    fontSize: 'clamp(0.8125rem, 2vw, 0.9375rem)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
-                  aria-current={isActive(link.path) ? "page" : undefined}
+                  data-cta-label="lets_connect"
+                  data-cta-location="header"
+                  data-cta-type="primary"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).gtag) {
+                      (window as any).gtag('event', 'cta_primary_clicked', {
+                        'event_category': 'conversion',
+                        'cta_location': 'header',
+                        'cta_label': 'lets_connect'
+                      });
+                    }
+                  }}
                 >
-                  {link.label}
+                  <span className="relative z-10">Let's Connect</span>
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"
+                  />
                 </Link>
-              ))}
-            </div>
 
-            {/* Right Group: CTA + Hamburger */}
-            <div className="flex items-center gap-3">
-              {/* CTA - Always Visible */}
-              <Link
-                to="/contact"
-                className="px-4 lg:px-6 py-2 rounded text-white transition-all hover:shadow-2xl hover:scale-105 relative group overflow-hidden"
-                style={{ 
-                  minHeight: '44px',
-                  background: 'linear-gradient(135deg, #117C92, #0E5A6A)',
-                  boxShadow: '0 8px 24px rgba(17,124,146,.35)',
-                  fontFamily: 'var(--font-serif)',
-                  fontWeight: 600,
-                  fontSize: 'clamp(0.8125rem, 2vw, 0.9375rem)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                data-cta-label="lets_connect"
-                data-cta-location="header"
-                data-cta-type="primary"
-                onClick={() => {
-                  if (typeof window !== 'undefined' && (window as any).gtag) {
-                    (window as any).gtag('event', 'cta_primary_clicked', {
-                      'event_category': 'conversion',
-                      'cta_location': 'header',
-                      'cta_label': 'lets_connect'
-                    });
-                  }
-                }}
-              >
-                <span className="relative z-10">Let's Connect</span>
-                <div 
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"
-                />
-              </Link>
-
-              {/* Hamburger - Mobile/Tablet Only */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-white hover:bg-white/10 rounded transition-colors"
-                style={{ minHeight: '44px', minWidth: '44px' }}
-                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={mobileMenuOpen}
-                aria-controls="mobile-menu"
-              >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+                {/* Hamburger - Mobile/Tablet Only */}
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="lg:hidden p-2 text-white hover:bg-white/10 rounded transition-colors"
+                  style={{ minHeight: '44px', minWidth: '44px' }}
+                  aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                  aria-expanded={mobileMenuOpen}
+                  aria-controls="mobile-menu"
+                >
+                  {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+              </div>
             </div>
           </div>
         </div>
