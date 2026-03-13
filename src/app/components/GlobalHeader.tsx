@@ -44,10 +44,12 @@ export function GlobalHeader() {
   }, [mobileMenuOpen]);
 
   // Navigation structure
-  const navLinks = [
+   const navLinks = [
     { label: "Capabilities", path: "/capabilities" },
     { label: "Approach", path: "/our-approach" },
     { label: "About", path: "/about" },
+    { label: "Attraction Diagnostic", path: "/attraction-diagnostic" },
+    { label: "AI & Visibility", path: "/our-approach#ai-visibility" },
   ];
 
   const isActive = (path: string) => {
