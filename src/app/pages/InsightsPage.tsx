@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { CtaPair } from "../components/CtaPair";
 
-export function InsightsPage() {
+export default function InsightsPage() {
   useEffect(() => {
     document.title = "Insights | The Collective POV | Thompson & Co Collective";
     
@@ -24,21 +24,35 @@ export function InsightsPage() {
       headline: "Why Most Employer Brands Fail Before They Launch",
       description: "The problem usually isn't the creative. It's that the narrative was never pressure-tested against what candidates actually experience. Here's where the gap starts — and how to close it before launch day.",
       link: "/insights/why-employer-brands-fail",
-      comingSoon: true,
+      comingSoon: false,
     },
     {
       category: "RECRUITMENT MARKETING",
       headline: "The Quiet Collapse of the Job Board Strategy",
       description: "Organizations are spending more on job distribution and getting fewer qualified applicants. The data is consistent. The cause is structural, not cyclical. What's actually happening — and what replaces it.",
       link: "/insights/job-board-strategy",
-      comingSoon: true,
+      comingSoon: false,
     },
     {
       category: "TALENT STRATEGY",
       headline: "Most Companies Are at Stage One. They Don't Know It.",
       description: "After running the Talent Maturity Audit across dozens of organizations, a pattern is clear: the gap between where leadership thinks they are and where the evidence puts them is almost always wider than expected.",
       link: "/insights/talent-maturity-gap",
-      comingSoon: true,
+      comingSoon: false,
+    },
+    {
+      category: "TALENT STRATEGY",
+      headline: "The Hidden Cost of Bad Hiring Decisions",
+      description: "Bad hires don't just cost money in salary and training. They cost time, momentum, and opportunity. Here's the full calculus of hiring mistakes and how to avoid them.",
+      link: "/insights/hidden-cost-bad-hiring",
+      comingSoon: false,
+    },
+    {
+      category: "AI VISIBILITY",
+      headline: "Optimizing for AI Search: Answer Engine Optimization",
+      description: "Google's AI answers are changing how candidates find employers. Here's how to optimize your employer brand content for AI search engines and featured snippets.",
+      link: "/insights/ai-search-optimization",
+      comingSoon: false,
     },
   ];
 
@@ -48,7 +62,28 @@ export function InsightsPage() {
       <section 
         className="relative pt-24 pb-20 md:pt-32 md:pb-24 overflow-hidden"
         style={{
-          background: 'linear-gradient(180deg, #0A1628 0%, #0E5A6A 100%)',
+          background: `radial-gradient(
+            ellipse 85% 65% at 68% 58%,
+            rgba(17,124,146,0.14) 0%,
+            rgba(17,124,146,0.08) 22%,
+            rgba(17,124,146,0.03) 40%,
+            rgba(17,124,146,0) 64%
+          ),
+          radial-gradient(
+            ellipse 120% 90% at 50% -10%,
+            rgba(255,255,255,0.04) 0%,
+            rgba(255,255,255,0.015) 18%,
+            rgba(255,255,255,0) 42%
+          ),
+          linear-gradient(
+            135deg,
+            #010308 0%,
+            #02050b 18%,
+            #040912 42%,
+            #08131d 68%,
+            #0d2a36 88%,
+            #123f4c 100%
+          )`,
           color: 'white',
         }}
       >

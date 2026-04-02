@@ -8,7 +8,7 @@ import { MeetCandiceSection } from "../components/MeetCandiceSection";
 import { FaqSection } from "../components/FaqSection";
 import { ContactSection } from "../components/ContactSection";
 
-export function PartnerPage() {
+export default function PartnerPage() {
   useEffect(() => {
     // Set page metadata
     document.title = "Thompson & Co Collective – Fractional Recruitment Marketing for Agency Partners";

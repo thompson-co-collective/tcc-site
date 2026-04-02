@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export function PrivacyPage() {
+export default function PrivacyPage() {
   useEffect(() => {
     document.title = "Privacy Policy | Thompson & Co Collective";
     
@@ -23,7 +23,28 @@ export function PrivacyPage() {
       <section 
         className="relative pt-24 pb-16 md:pt-32 md:pb-20 overflow-hidden"
         style={{
-          background: 'linear-gradient(180deg, #0A1628 0%, #0E5A6A 100%)',
+          background: `radial-gradient(
+            ellipse 85% 65% at 68% 58%,
+            rgba(17,124,146,0.14) 0%,
+            rgba(17,124,146,0.08) 22%,
+            rgba(17,124,146,0.03) 40%,
+            rgba(17,124,146,0) 64%
+          ),
+          radial-gradient(
+            ellipse 120% 90% at 50% -10%,
+            rgba(255,255,255,0.04) 0%,
+            rgba(255,255,255,0.015) 18%,
+            rgba(255,255,255,0) 42%
+          ),
+          linear-gradient(
+            135deg,
+            #010308 0%,
+            #02050b 18%,
+            #040912 42%,
+            #08131d 68%,
+            #0d2a36 88%,
+            #123f4c 100%
+          )`,
           color: 'white',
         }}
       >

@@ -142,14 +142,19 @@ const SegmentedControl: React.FC<{
   value: Answer;
   onChange: (value: 0 | 1 | 2) => void;
   labels: [string, string, string];
-}> = ({ value, onChange, labels }) => {
+}> = (props: {
+  value: Answer;
+  onChange: (value: 0 | 1 | 2) => void;
+  labels: [string, string, string];
+}) => {
+  const { value, onChange, labels } = props;
   return (
     <div
       className="inline-flex rounded-lg border border-gray-300 bg-white overflow-hidden"
       role="radiogroup"
       aria-label="Answer selection"
     >
-      {labels.map((label, index) => {
+      {labels.map((label: string, index: number) => {
         const val = index as 0 | 1 | 2;
         const isSelected = value === val;
         return (
@@ -201,6 +206,13 @@ export default function TalentAudit() {
   // Set document title
   useEffect(() => {
     document.title = 'Talent Maturity Audit | Thompson & Co Collective';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        "content",
+        "Assess your organization's talent attraction maturity. Get a baseline diagnostic and clear next steps for employer brand and recruitment marketing improvement."
+      );
+    }
     const metaRobots = document.querySelector('meta[name="robots"]');
     if (metaRobots) {
       metaRobots.setAttribute('content', 'noindex');
@@ -231,7 +243,7 @@ export default function TalentAudit() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        setState((prev) => ({ ...prev, answers: parsed.answers || prev.answers }));
+        setState((prev: AuditState) => ({ ...prev, answers: parsed.answers || prev.answers }));
         setShowRestoredNotification(true);
         setTimeout(() => setShowRestoredNotification(false), 3000);
       } catch (e) {
@@ -242,7 +254,7 @@ export default function TalentAudit() {
 
   // Save to localStorage whenever answers change
   useEffect(() => {
-    if (state.answers.some((a) => a !== null)) {
+    if (state.answers.some((a: Answer) => a !== null)) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers: state.answers }));
     }
   }, [state.answers]);
@@ -274,7 +286,7 @@ export default function TalentAudit() {
 
   // Start audit
   const handleStartAudit = () => {
-    setState((prev) => ({ ...prev, stage: 'questions' }));
+    setState((prev: AuditState) => ({ ...prev, stage: 'questions' }));
     trackEvent('audit_started', { page: '/audit', cta_name: 'Start Audit' });
   };
 
@@ -282,27 +294,27 @@ export default function TalentAudit() {
   const handleAnswerChange = (index: number, value: 0 | 1 | 2) => {
     const newAnswers = [...state.answers];
     newAnswers[index] = value;
-    setState((prev) => ({ ...prev, answers: newAnswers }));
+    setState((prev: AuditState) => ({ ...prev, answers: newAnswers }));
   };
 
   // Submit audit
   const handleSubmit = async () => {
     const unanswered = state.answers
-      .map((a, i) => (a === null ? i : null))
-      .filter((i) => i !== null);
+      .map((a: Answer, i: number) => (a === null ? i : null))
+      .filter((i): i is number => i !== null);
 
     if (unanswered.length > 0) {
       // Scroll to first unanswered
       const firstMissing = unanswered[0]!;
-      setState((prev) => ({ ...prev, currentQuestionIndex: firstMissing }));
+      setState((prev: AuditState) => ({ ...prev, currentQuestionIndex: firstMissing }));
       return;
     }
 
     // Calculate score
-    const totalScore = state.answers.reduce((sum, val) => sum + (val || 0), 0);
+    const totalScore = state.answers.reduce((sum: number, val: Answer) => sum + (val || 0), 0);
     const band = calculateBand(totalScore);
 
-    setState((prev) => ({ ...prev, score: totalScore, band }));
+    setState((prev: AuditState) => ({ ...prev, score: totalScore, band }));
 
     // Fire confetti
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -314,7 +326,7 @@ export default function TalentAudit() {
     setShowBaselineMessage(true);
     setTimeout(() => {
       setShowBaselineMessage(false);
-      setState((prev) => ({ ...prev, stage: 'results' }));
+      setState((prev: AuditState) => ({ ...prev, stage: 'results' }));
       // Scroll to results
       setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
     }, 1500);
@@ -367,7 +379,7 @@ export default function TalentAudit() {
   const currentQuestion = QUESTIONS[state.currentQuestionIndex];
   const currentAnswer = state.answers[state.currentQuestionIndex];
   const isLastQuestion = state.currentQuestionIndex === QUESTIONS.length - 1;
-  const allAnswered = state.answers.every((a) => a !== null);
+  const allAnswered = state.answers.every((a: Answer) => a !== null);
 
   return (
     <div className="min-h-screen bg-white">
@@ -477,7 +489,28 @@ export default function TalentAudit() {
             <div 
               className="relative w-full overflow-hidden"
               style={{
-                background: 'linear-gradient(180deg, #0A1628 0%, #0E5A6A 100%)',
+                background: `radial-gradient(
+                  ellipse 85% 65% at 68% 58%,
+                  rgba(17,124,146,0.14) 0%,
+                  rgba(17,124,146,0.08) 22%,
+                  rgba(17,124,146,0.03) 40%,
+                  rgba(17,124,146,0) 64%
+                ),
+                radial-gradient(
+                  ellipse 120% 90% at 50% -10%,
+                  rgba(255,255,255,0.04) 0%,
+                  rgba(255,255,255,0.015) 18%,
+                  rgba(255,255,255,0) 42%
+                ),
+                linear-gradient(
+                  135deg,
+                  #010308 0%,
+                  #02050b 18%,
+                  #040912 42%,
+                  #08131d 68%,
+                  #0d2a36 88%,
+                  #123f4c 100%
+                )`,
                 minHeight: '240px',
               }}
             >
@@ -598,8 +631,22 @@ export default function TalentAudit() {
                       color: 'rgba(255,255,255,0.9)',
                     }}
                   >
-                    A fast diagnostic that shows how built your talent attraction system is — and what to fix first.
+                    <strong className="text-white">Get your talent attraction baseline in 5 minutes.</strong> Discover exactly what to fix first — no sales pitch, just actionable insights used by 200+ organizations.
                   </p>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="flex items-center gap-2 text-white/80">
+                      <span className="text-green-400">✓</span>
+                      <span className="text-sm">Free assessment</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white/80">
+                      <span className="text-green-400">✓</span>
+                      <span className="text-sm">5-minute completion</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white/80">
+                      <span className="text-green-400">✓</span>
+                      <span className="text-sm">Actionable results</span>
+                    </div>
+                  </div>
                   <p
                     className="mb-0"
                     style={{
@@ -852,7 +899,28 @@ export default function TalentAudit() {
             <div 
               className="relative w-full overflow-hidden -mt-12 md:-mt-20"
               style={{
-                background: 'linear-gradient(180deg, #0A1628 0%, #0E5A6A 100%)',
+                background: `radial-gradient(
+                  ellipse 85% 65% at 68% 58%,
+                  rgba(17,124,146,0.14) 0%,
+                  rgba(17,124,146,0.08) 22%,
+                  rgba(17,124,146,0.03) 40%,
+                  rgba(17,124,146,0) 64%
+                ),
+                radial-gradient(
+                  ellipse 120% 90% at 50% -10%,
+                  rgba(255,255,255,0.04) 0%,
+                  rgba(255,255,255,0.015) 18%,
+                  rgba(255,255,255,0) 42%
+                ),
+                linear-gradient(
+                  135deg,
+                  #010308 0%,
+                  #02050b 18%,
+                  #040912 42%,
+                  #08131d 68%,
+                  #0d2a36 88%,
+                  #123f4c 100%
+                )`,
                 minHeight: '364px',
               }}
             >

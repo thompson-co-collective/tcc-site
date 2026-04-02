@@ -1,21 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { GlobalHeader } from "./components/GlobalHeader";
 import { GlobalFooter } from "./components/GlobalFooter";
-// import { PageViewTracker } from "./components/PageViewTracker"; // TEMP DISABLED
-import { HomePage } from "./pages/HomePage";
-import { ContactPage } from "./pages/ContactPage";
-import { PartnerPage } from "./pages/PartnerPage";
-import { CapabilitiesPage } from "./pages/CapabilitiesPage";
-import { OurApproachPage } from "./pages/OurApproachPage";
-import { AboutPage } from "./pages/AboutPage";
-import { InsightsPage } from "./pages/InsightsPage";
-import { PrivacyPage } from "./pages/PrivacyPage";
-import { TermsPage } from "./pages/TermsPage";
-import { SitemapPage } from "./pages/SitemapPage";
-import TalentAudit from "./pages/TalentAudit";
-import { AttractionDiagnosticPage } from "./pages/AttractionDiagnosticPage";
+import { ExitIntentPopup } from "./components/ExitIntentPopup";
+import { FloatingCTA } from "./components/FloatingCTA";
+
+// Lazy load pages for better performance
+const HomePage = lazy(() => import("./pages/HomePage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const PartnerPage = lazy(() => import("./pages/PartnerPage"));
+const CapabilitiesPage = lazy(() => import("./pages/CapabilitiesPage"));
+const OurApproachPage = lazy(() => import("./pages/OurApproachPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const InsightsPage = lazy(() => import("./pages/InsightsPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const TermsPage = lazy(() => import("./pages/TermsPage"));
+const SitemapPage = lazy(() => import("./pages/SitemapPage"));
+const TalentAudit = lazy(() => import("./pages/TalentAudit"));
+const AttractionDiagnosticPage = lazy(() => import("./pages/AttractionDiagnosticPage"));
+const WhyEmployerBrandsFail = lazy(() => import("./pages/insights/WhyEmployerBrandsFail"));
+const TheQuietCollapseOfJobBoardStrategy = lazy(() => import("./pages/insights/TheQuietCollapseOfJobBoardStrategy"));
+const MostCompaniesAreAtStageOne = lazy(() => import("./pages/insights/MostCompaniesAreAtStageOne"));
+const TheHiddenCostOfBadHiring = lazy(() => import("./pages/insights/TheHiddenCostOfBadHiring"));
+const OptimizingForAISearch = lazy(() => import("./pages/insights/OptimizingForAISearch"));
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -40,44 +48,12 @@ function SkipLink() {
   );
 }
 
-// Placeholder pages
-function PlaceholderPage({ title }: { title: string }) {
+// Loading component for lazy-loaded pages
+function PageLoader() {
   return (
-    <main id="main-content" className="pt-32 pb-20 px-4">
-      <div className="max-w-4xl mx-auto text-center">
-        <h1
-          className="mb-6"
-          style={{
-            fontSize: "clamp(2rem, 4vw, 3rem)",
-            fontWeight: 600,
-            fontFamily: "var(--font-serif)",
-            color: "#0A1220",
-          }}
-        >
-          {title}
-        </h1>
-        <p
-          className="text-gray-600 mb-8"
-          style={{
-            fontSize: "1.125rem",
-            fontFamily: "var(--font-sans)",
-          }}
-        >
-          This page is under construction and will be available soon.
-        </p>
-        <a
-          href="/"
-          className="inline-block px-6 py-3 rounded text-white"
-          style={{
-            background: "linear-gradient(135deg, #117C92, #0E5A6A)",
-            fontFamily: "var(--font-serif)",
-            fontWeight: 600,
-          }}
-        >
-          Return Home
-        </a>
-      </div>
-    </main>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#117C92]"></div>
+    </div>
   );
 }
 
@@ -93,43 +69,57 @@ export default function App() {
 
           <GlobalHeader />
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/capabilities" element={<CapabilitiesPage />} />
-            <Route path="/our-approach" element={<OurApproachPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/audit" element={<TalentAudit />} />
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/capabilities" element={<CapabilitiesPage />} />
+              <Route path="/our-approach" element={<OurApproachPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/audit" element={<TalentAudit />} />
 
-            {/* Redirect legacy URL */}
-            <Route path="/talent-maturity-audit" element={<Navigate to="/audit" replace />} />
+              {/* Redirect legacy URL */}
+              <Route path="/talent-maturity-audit" element={<Navigate to="/audit" replace />} />
 
-            <Route path="/attraction-diagnostic" element={<AttractionDiagnosticPage />} />
-            <Route path="/insights" element={<InsightsPage />} />
+              <Route path="/attraction-diagnostic" element={<AttractionDiagnosticPage />} />
+              <Route path="/insights" element={<InsightsPage />} />
 
-            <Route
-              path="/insights/why-employer-brands-fail"
-              element={<PlaceholderPage title="Why Most Employer Brands Fail Before They Launch" />}
-            />
+              <Route
+                path="/insights/why-employer-brands-fail"
+                element={<WhyEmployerBrandsFail />}
+              />
 
-            <Route
-              path="/insights/job-board-strategy"
-              element={<PlaceholderPage title="The Quiet Collapse of the Job Board Strategy" />}
-            />
+              <Route
+                path="/insights/job-board-strategy"
+                element={<TheQuietCollapseOfJobBoardStrategy />}
+              />
 
-            <Route
-              path="/insights/talent-maturity-gap"
-              element={<PlaceholderPage title="Most Companies Are at Stage One" />}
-            />
+              <Route
+                path="/insights/talent-maturity-gap"
+                element={<MostCompaniesAreAtStageOne />}
+              />
 
-            <Route path="/blog" element={<Navigate to="/insights" replace />} />
-            <Route path="/partner" element={<PartnerPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="/sitemap" element={<SitemapPage />} />
-          </Routes>
+              <Route
+                path="/insights/hidden-cost-bad-hiring"
+                element={<TheHiddenCostOfBadHiring />}
+              />
+
+              <Route
+                path="/insights/ai-search-optimization"
+                element={<OptimizingForAISearch />}
+              />
+
+              <Route path="/blog" element={<Navigate to="/insights" replace />} />
+              <Route path="/partner" element={<PartnerPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/sitemap" element={<SitemapPage />} />
+            </Routes>
+          </Suspense>
 
           <GlobalFooter />
+          <ExitIntentPopup />
+          <FloatingCTA />
         </div>
       </Router>
     </HelmetProvider>

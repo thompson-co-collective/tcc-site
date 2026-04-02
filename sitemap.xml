@@ -23,6 +23,42 @@
     <loc>https://thompsoncollective.co/insights</loc>
   </url>
 
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://thompsoncollective.co/insights/why-employer-brands-fail</loc>
+    <lastmod>2024-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thompsoncollective.co/insights/job-board-strategy</loc>
+    <lastmod>2024-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thompsoncollective.co/insights/talent-maturity-gap</loc>
+    <lastmod>2024-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thompsoncollective.co/insights/hidden-cost-bad-hiring</loc>
+    <lastmod>2024-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thompsoncollective.co/insights/ai-search-optimization</loc>
+    <lastmod>2024-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <url>
     <loc>https://thompsoncollective.co/audit</loc>
   </url>

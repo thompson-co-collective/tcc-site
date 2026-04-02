@@ -7,7 +7,7 @@ import { CtaPair } from "../components/CtaPair";
 import ampersandWhite from "../../assets/ampersand-white.png";
 import logoStacked from "../../assets/logo-stacked.png";
 
-export function HomePage() {
+export default function HomePage() {
   useEffect(() => {
     document.title = "Thompson & Co Collective – Employer Brand & Recruitment Marketing";
     
@@ -89,7 +89,28 @@ export function HomePage() {
         id="talent-audit"
         className="relative pt-24 pb-20 md:pt-40 md:pb-32 overflow-hidden"
         style={{
-          background: 'linear-gradient(180deg, #0A1628 0%, #0E5A6A 100%)',
+          background: `radial-gradient(
+            ellipse 85% 65% at 68% 58%,
+            rgba(17,124,146,0.14) 0%,
+            rgba(17,124,146,0.08) 22%,
+            rgba(17,124,146,0.03) 40%,
+            rgba(17,124,146,0) 64%
+          ),
+          radial-gradient(
+            ellipse 120% 90% at 50% -10%,
+            rgba(255,255,255,0.04) 0%,
+            rgba(255,255,255,0.015) 18%,
+            rgba(255,255,255,0) 42%
+          ),
+          linear-gradient(
+            135deg,
+            #010308 0%,
+            #02050b 18%,
+            #040912 42%,
+            #08131d 68%,
+            #0d2a36 88%,
+            #123f4c 100%
+          )`,
           color: 'white',
           isolation: 'isolate',
         }}
@@ -278,30 +299,28 @@ export function HomePage() {
               fontWeight: 400,
             }}
           >
-            We align your EVP, recruitment marketing, and candidate experience so your story holds up where it's evaluated first — <span 
-              style={{
-                color: '#ffffff',
-                fontWeight: 600,
-                fontStyle: 'italic',
-              }}
-            >in search</span>, <span 
-              style={{
-                color: '#ffffff',
-                fontWeight: 600,
-                fontStyle: 'italic',
-              }}
-            >in AI</span>, and <span 
-              style={{
-                color: '#ffffff',
-                fontWeight: 600,
-                fontStyle: 'italic',
-              }}
-            >in the room</span>.
+            Stop losing qualified candidates to unclear messaging and inconsistent experiences. 
+            <strong className="text-white">Get your talent attraction baseline in 5 minutes</strong> — 
+            then discover exactly what to fix first.
           </p>
 
           {/* CTA System */}
           <div className="animate-fadeInCTA">
             <CtaPair variant="light" />
+          </div>
+
+          {/* Urgency & Social Proof */}
+          <div className="mt-8 text-center animate-fadeInCTA" style={{ animationDelay: '0.2s' }}>
+            <p className="text-white/60 text-sm mb-2">
+              Join 200+ organizations who've improved their hiring outcomes
+            </p>
+            <div className="flex items-center justify-center gap-4 text-xs text-white/40">
+              <span>⚡ Free assessment</span>
+              <span>•</span>
+              <span>📊 Actionable insights</span>
+              <span>•</span>
+              <span>🎯 No sales pitch</span>
+            </div>
           </div>
         </div>
 
@@ -716,6 +735,7 @@ export function HomePage() {
              <img
                 src={logoStacked}
                 alt="Thompson & Co Brand Mark"
+                loading="lazy"
                 style={{
                   width: '120%',
                   height: '120%',

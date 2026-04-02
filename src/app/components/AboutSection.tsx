@@ -1,4 +1,4 @@
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { ImageWithFallback } from "./ui/ImageWithFallback";
 
 export function AboutSection() {
   return (
