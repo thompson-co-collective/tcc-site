@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Shield, Clock, CheckCircle } from "lucide-react";
+import { submitContactSubmission } from "../lib/contactSubmission";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -7,27 +8,28 @@ export function ContactSection() {
     email: "",
     company: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitErrorMessage, setSubmitErrorMessage] = useState("");
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Record<string, string> = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+      newErrors.name = "Please enter your name";
     }
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Please enter your email address";
     } else if (!validateEmail(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+      newErrors.email = "Please enter a valid email address";
     }
     if (!formData.company.trim()) {
-      newErrors.company = "Company name is required";
+      newErrors.company = "Please enter your company name";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -35,12 +37,28 @@ export function ContactSection() {
       return;
     }
 
-    // Simulate form submission
-    setSubmitted(true);
     setErrors({});
-    
-    // Track form submission event (placeholder for analytics)
-    console.log("Form submitted:", formData);
+    setFormStatus("submitting");
+    setSubmitErrorMessage("");
+
+    const result = await submitContactSubmission(
+      {
+        ...formData,
+        needHelp: "partner-support",
+        message: "",
+      },
+      "partner_contact_section"
+    );
+
+    if (result.ok) {
+      setFormStatus("success");
+      return;
+    }
+
+    setFormStatus("error");
+    setSubmitErrorMessage(
+      "We couldn't send your request right now. Please try again in a moment, or email hello@thompsoncollective.co."
+    );
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -156,8 +174,18 @@ export function ContactSection() {
 
           {/* Right Column - Form */}
           <div className="bg-white rounded-lg p-8 md:p-10">
-            {!submitted ? (
+            {formStatus !== "success" ? (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {formStatus === "error" && (
+                  <div
+                    role="alert"
+                    className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700"
+                    style={{ fontFamily: "var(--font-sans)", fontSize: "0.9rem" }}
+                  >
+                    {submitErrorMessage}
+                  </div>
+                )}
+
                 <div>
                   <label 
                     htmlFor="name" 
@@ -265,6 +293,7 @@ export function ContactSection() {
 
                 <button
                   type="submit"
+                  disabled={formStatus === "submitting"}
                   className="w-full px-8 py-4 rounded text-white transition-all"
                   style={{ 
                     minHeight: '56px',
@@ -275,7 +304,7 @@ export function ContactSection() {
                     boxShadow: '0 12px 34px rgba(17,124,146,.22)',
                   }}
                 >
-                  Book a Clarity Call
+                  {formStatus === "submitting" ? "Sending..." : "Book a Clarity Call"}
                 </button>
                 <p 
                   className="text-center mt-3 text-gray-500 text-sm"

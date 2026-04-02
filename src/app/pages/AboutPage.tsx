@@ -6,16 +6,6 @@ import ampersandWhite from "../../assets/ampersand-white.png";
 
 export default function AboutPage() {
   useEffect(() => {
-    document.title = "About | Thompson & Co Collective";
-
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Thompson & Co Collective is a boutique collective of senior practitioners - assembled around your problem, embedded in the work, and accountable to outcomes long after strategy ships."
-      );
-    }
-
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "AboutPage",
@@ -599,6 +589,10 @@ export default function AboutPage() {
           <img
             src={ampersandWhite}
             alt=""
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+            sizes="45vw"
             style={{ width: "100%", height: "auto", display: "block" }}
             draggable={false}
           />

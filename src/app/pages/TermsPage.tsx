@@ -3,16 +3,6 @@ import { Link } from "react-router-dom";
 
 export default function TermsPage() {
   useEffect(() => {
-    document.title = "Terms of Use | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Thompson & Co Collective Terms of Use. These terms are written to be clear and direct. Learn about your rights and responsibilities when using our website."
-      );
-    }
-
     // Scroll to top on page load
     window.scrollTo(0, 0);
   }, []);

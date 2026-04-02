@@ -7,16 +7,6 @@ export default function CapabilitiesPage() {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = "Employer Brand Strategy & Recruitment Marketing Services | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Thompson & Co Collective delivers employer brand strategy, EVP development, recruitment marketing, and candidate experience design. A collective of industry veterans — accountable to your outcomes."
-      );
-    }
-
     // Track time on page
     const startTime = Date.now();
     return () => {
@@ -343,6 +333,55 @@ export default function CapabilitiesPage() {
                   Read our insights →
                 </Link>
               </p>
+            </div>
+
+            {/* Contextual Progression Module — Service Fit */}
+            <div className="max-w-4xl mx-auto px-4 sm:px-0" style={{ marginBottom: '52px' }}>
+              <div
+                className="rounded-lg border border-gray-200 p-8 md:p-10 text-center"
+                style={{ backgroundColor: '#F9FAFB' }}
+              >
+                <div
+                  className="mb-3"
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: '#117C92',
+                  }}
+                >
+                  Service Fit
+                </div>
+                <h3
+                  className="mb-4"
+                  style={{
+                    fontSize: 'clamp(1.375rem, 2.6vw, 1.875rem)',
+                    fontWeight: 600,
+                    lineHeight: 1.35,
+                    letterSpacing: '-0.02em',
+                    fontFamily: 'var(--font-serif)',
+                    color: '#0A1220',
+                  }}
+                >
+                  Not sure which capability to prioritize first?
+                </h3>
+                <p
+                  className="mb-8 max-w-2xl mx-auto"
+                  style={{
+                    fontSize: '0.975rem',
+                    lineHeight: 1.6,
+                    fontFamily: 'var(--font-sans)',
+                    color: '#4B5563',
+                  }}
+                >
+                  Use the baseline to pinpoint your highest-impact gap first, then scope the right engagement with confidence.
+                </p>
+                <div className="flex justify-center">
+                  <CtaPair variant="dark" />
+                </div>
+              </div>
             </div>
 
             {/* Priority Fix #2: Group Divider */}

@@ -1,12 +1,35 @@
 import { useEffect, useState } from 'react';
 import { X, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { trackEvent } from '../lib/analytics';
+
+const SUPPRESSED_ROUTES = new Set(['/contact', '/capabilities', '/audit']);
+
+function normalizePath(pathname: string) {
+  if (!pathname || pathname === '/') return '/';
+  return pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+}
+
+function isExitIntentEligible(pathname: string) {
+  const normalized = normalizePath(pathname);
+  if (SUPPRESSED_ROUTES.has(normalized)) return false;
+
+  // Footprint reduction: allow exit intent only on insights routes for now.
+  return normalized === '/insights' || normalized.startsWith('/insights/');
+}
 
 export function ExitIntentPopup() {
+  const { pathname } = useLocation();
   const [showPopup, setShowPopup] = useState(false);
   const [hasShown, setHasShown] = useState(false);
 
   useEffect(() => {
+    const isEligible = isExitIntentEligible(pathname);
+    if (!isEligible) {
+      setShowPopup(false);
+      return;
+    }
+
     // Check if user has already seen the popup
     const hasSeenPopup = localStorage.getItem('exit-intent-shown');
     if (hasSeenPopup) return;
@@ -18,61 +41,37 @@ export function ExitIntentPopup() {
         setHasShown(true);
         localStorage.setItem('exit-intent-shown', 'true');
 
-        // Track exit intent event
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-          (window as any).gtag('event', 'exit_intent_popup_shown', {
-            event_category: 'Conversion',
-            event_label: 'Exit Intent Popup'
-          });
-        }
-      }
-    };
-
-    // Add scroll-based trigger as backup (if user scrolls fast toward top)
-    const handleScroll = () => {
-      if (window.scrollY <= 100 && !hasShown) {
-        setTimeout(() => {
-          if (!hasShown) {
-            setShowPopup(true);
-            setHasShown(true);
-            localStorage.setItem('exit-intent-shown', 'true');
-          }
-        }, 1000);
+        trackEvent('exit_intent_popup_shown', {
+          event_category: 'Conversion',
+          event_label: 'Exit Intent Popup'
+        });
       }
     };
 
     document.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('scroll', handleScroll);
 
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('scroll', handleScroll);
     };
-  }, [hasShown]);
+  }, [hasShown, pathname]);
 
   const handleClose = () => {
     setShowPopup(false);
 
-    // Track popup dismissal
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'exit_intent_popup_dismissed', {
-        event_category: 'Conversion',
-        event_label: 'Exit Intent Popup'
-      });
-    }
+    trackEvent('exit_intent_popup_dismissed', {
+      event_category: 'Conversion',
+      event_label: 'Exit Intent Popup'
+    });
   };
 
   const handleCTAClick = () => {
     setShowPopup(false);
 
-    // Track CTA click
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'exit_intent_popup_cta_clicked', {
-        event_category: 'Conversion',
-        event_label: 'Exit Intent Popup',
-        event_value: 1
-      });
-    }
+    trackEvent('exit_intent_popup_cta_clicked', {
+      event_category: 'Conversion',
+      event_label: 'Exit Intent Popup',
+      event_value: 1
+    });
   };
 
   if (!showPopup) return null;

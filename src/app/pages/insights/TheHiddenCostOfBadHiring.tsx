@@ -5,16 +5,6 @@ import { CtaPair } from "../../components/CtaPair";
 
 export default function TheHiddenCostOfBadHiring() {
   useEffect(() => {
-    document.title = "The Hidden Cost of Bad Hiring Decisions | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Bad hires don't just cost money in salary and training. They cost time, momentum, and opportunity. Here's the full calculus of hiring mistakes and how to avoid them."
-      );
-    }
-
     // Add Article Schema
     const articleSchema = {
       "@context": "https://schema.org",

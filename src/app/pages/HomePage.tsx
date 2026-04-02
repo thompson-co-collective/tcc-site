@@ -9,16 +9,6 @@ import logoStacked from "../../assets/logo-stacked.png";
 
 export default function HomePage() {
   useEffect(() => {
-    document.title = "Thompson & Co Collective – Employer Brand & Recruitment Marketing";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Strategic employer branding and recruitment marketing that moves hiring outcomes. EVP development, candidate experience, and media governance that drives measurable results."
-      );
-    }
-
     // Add FAQ Schema for SEO/AEO
     const faqSchema = {
       "@context": "https://schema.org",
@@ -115,39 +105,7 @@ export default function HomePage() {
           isolation: 'isolate',
         }}
       >
-        {/* Hero Background Art — Ampersand Layers */}
-        {/* AMP — Echo Layer (behind base, blurred depth) */}
-        <div
-          className="amp-echo"
-          style={{
-            position: 'absolute',
-            right: '-45%',
-            top: '50%',
-            transform: 'translateY(-50%) rotate(18deg) translate(-18px, 22px) scaleX(0.6825)',
-            width: 'min(2621px, 121.68vw)',
-            height: 'auto',
-            opacity: 0,
-            pointerEvents: 'none',
-            zIndex: 0,
-            filter: 'blur(12px)',
-            maskImage: 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0.8) 70%, white 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0.8) 70%, white 100%)',
-          }}
-          aria-hidden="true"
-        >
-          <img
-            src={ampersandWhite}
-            alt=""
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-            }}
-            draggable={false}
-          />
-        </div>
-
-        {/* AMP — Base Layer (main white ampersand) */}
+        {/* Hero Background Art — Ampersand Base Layer */}
         <div
           className="amp-base"
           style={{
@@ -169,6 +127,10 @@ export default function HomePage() {
           <img
             src={ampersandWhite}
             alt=""
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+            sizes="(max-width: 768px) 177.84vw, 121.68vw"
             style={{
               width: '100%',
               height: 'auto',
@@ -186,12 +148,6 @@ export default function HomePage() {
               right: -55% !important;
               width: 177.84vw !important;
               filter: blur(0px) !important;
-            }
-            .amp-echo {
-              opacity: 0 !important;
-              right: -55% !important;
-              width: 177.84vw !important;
-              filter: blur(10px) !important;
             }
           }
         `}</style>
@@ -712,6 +668,57 @@ export default function HomePage() {
                   Build claims that hold up under scrutiny.
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contextual Progression Module — Post Market Reality */}
+      <section className="py-14 md:py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className="rounded-lg border border-gray-200 p-8 md:p-10 text-center"
+            style={{ backgroundColor: '#F9FAFB' }}
+          >
+            <div
+              className="mb-3"
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#117C92',
+              }}
+            >
+              Next Best Step
+            </div>
+            <h3
+              className="mb-4"
+              style={{
+                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                fontWeight: 600,
+                lineHeight: 1.3,
+                letterSpacing: '-0.02em',
+                fontFamily: 'var(--font-serif)',
+                color: '#0A1220',
+              }}
+            >
+              Identify the bottleneck before changing spend or messaging.
+            </h3>
+            <p
+              className="mb-8 max-w-2xl mx-auto"
+              style={{
+                fontSize: '0.975rem',
+                lineHeight: 1.6,
+                fontFamily: 'var(--font-sans)',
+                color: '#4B5563',
+              }}
+            >
+              Start with a baseline diagnostic across narrative, channels, and candidate friction — then prioritize what will move outcomes fastest.
+            </p>
+            <div className="flex justify-center">
+              <CtaPair variant="dark" />
             </div>
           </div>
         </div>
@@ -1736,6 +1743,10 @@ export default function HomePage() {
           <img
             src={ampersandWhite}
             alt=""
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+            sizes="78vw"
             style={{
               width: '100%',
               height: 'auto',

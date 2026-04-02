@@ -5,16 +5,6 @@ import { CtaPair } from "../components/CtaPair";
 
 export default function InsightsPage() {
   useEffect(() => {
-    document.title = "Insights | The Collective POV | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Perspectives from Thompson & Co practitioners, curated industry research, and thinking worth your time on talent attraction, employer brand, and recruitment marketing."
-      );
-    }
-
     window.scrollTo(0, 0);
   }, []);
 
@@ -272,6 +262,57 @@ export default function InsightsPage() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contextual Progression Module — Post Insights Grid */}
+      <section className="py-14 md:py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className="rounded-lg border border-gray-200 p-8 md:p-10 text-center"
+            style={{ backgroundColor: '#F9FAFB' }}
+          >
+            <div
+              className="mb-3"
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#117C92',
+              }}
+            >
+              Apply the Insight
+            </div>
+            <h3
+              className="mb-4"
+              style={{
+                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                fontWeight: 600,
+                lineHeight: 1.3,
+                letterSpacing: '-0.02em',
+                fontFamily: 'var(--font-serif)',
+                color: '#0A1220',
+              }}
+            >
+              Turn perspective into a practical next step.
+            </h3>
+            <p
+              className="mb-8 max-w-2xl mx-auto"
+              style={{
+                fontSize: '0.975rem',
+                lineHeight: 1.6,
+                fontFamily: 'var(--font-sans)',
+                color: '#4B5563',
+              }}
+            >
+              Start with a baseline diagnostic to identify what to fix now, what to sequence next, and where effort will have the greatest hiring impact.
+            </p>
+            <div className="flex justify-center">
+              <CtaPair variant="dark" />
+            </div>
           </div>
         </div>
       </section>
