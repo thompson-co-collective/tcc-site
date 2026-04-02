@@ -200,6 +200,7 @@ export default function TalentAudit() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailValue, setEmailValue] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailSubmitError, setEmailSubmitError] = useState('');
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -344,9 +345,16 @@ export default function TalentAudit() {
     if (!emailValue || state.score === null || !state.band) return;
 
     setIsSubmitting(true);
+    setEmailSubmitError('');
 
-    // Mock API call (replace with real HubSpot endpoint)
     try {
+      let utms: Record<string, string> = {};
+      try {
+        utms = JSON.parse(sessionStorage.getItem(UTM_STORAGE_KEY) || '{}');
+      } catch {
+        utms = {};
+      }
+
       const response = await fetch('/api/audit-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -354,18 +362,26 @@ export default function TalentAudit() {
           email: emailValue,
           score: state.score,
           band: state.band,
-          utms: JSON.parse(sessionStorage.getItem(UTM_STORAGE_KEY) || '{}'),
+          utms,
         }),
-      }).catch(() => ({ ok: true })); // Mock success on network error
+      });
 
-      if (response.ok) {
-        setEmailSubmitted(true);
-        trackEvent('audit_email_captured', {
-          audit_score: state.score,
-          maturity_band: state.band,
-          page: '/audit',
-        });
+      if (!response.ok) {
+        throw new Error(`Audit email submission failed with status ${response.status}`);
       }
+
+      setEmailSubmitted(true);
+      trackEvent('audit_email_captured', {
+        audit_score: state.score,
+        maturity_band: state.band,
+        page: '/audit',
+      });
+    } catch (error) {
+      setEmailSubmitError('We could not send your results right now. Please try again.');
+      trackEvent('audit_email_capture_failed', {
+        page: '/audit',
+        reason: error instanceof Error ? error.message : 'unknown_error',
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -1141,6 +1157,15 @@ export default function TalentAudit() {
                           {isSubmitting ? 'Sending...' : 'Send my results'}
                         </button>
                       </div>
+                      {emailSubmitError && (
+                        <p
+                          role="alert"
+                          className="mt-3 text-center text-red-600"
+                          style={{ fontFamily: 'var(--font-sans)', fontSize: '0.875rem' }}
+                        >
+                          {emailSubmitError}
+                        </p>
+                      )}
                     </form>
                   </div>
                 ) : (

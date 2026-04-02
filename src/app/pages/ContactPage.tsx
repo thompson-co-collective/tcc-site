@@ -58,19 +58,29 @@ export default function ContactPage() {
     }
 
     setFormStatus("submitting");
-
-    // Simulate form submission (replace with actual HubSpot integration)
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    // Track form submission
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "contact_form_submitted", {
-        event_category: "Form",
-        event_label: "Contact Form",
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-    }
 
-    setFormStatus("success");
+      if (!response.ok) {
+        throw new Error(`Contact submission failed with status ${response.status}`);
+      }
+
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "contact_form_submitted", {
+          event_category: "Form",
+          event_label: "Contact Form",
+        });
+      }
+
+      setFormStatus("success");
+    } catch (error) {
+      console.error("Contact form submission failed", error);
+      setFormStatus("error");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -242,6 +252,16 @@ export default function ContactPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {formStatus === "error" && (
+              <div
+                role="alert"
+                className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700"
+                style={{ fontFamily: "var(--font-sans)", fontSize: "0.9rem" }}
+              >
+                We couldn't send your message right now. Please try again in a moment.
+              </div>
+            )}
+
             {/* Name */}
             <div>
               <label 
