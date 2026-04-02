@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { X, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { trackEvent } from '../lib/analytics';
 
 export function ExitIntentPopup() {
   const [showPopup, setShowPopup] = useState(false);
@@ -18,13 +19,10 @@ export function ExitIntentPopup() {
         setHasShown(true);
         localStorage.setItem('exit-intent-shown', 'true');
 
-        // Track exit intent event
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-          (window as any).gtag('event', 'exit_intent_popup_shown', {
-            event_category: 'Conversion',
-            event_label: 'Exit Intent Popup'
-          });
-        }
+        trackEvent('exit_intent_popup_shown', {
+          event_category: 'Conversion',
+          event_label: 'Exit Intent Popup'
+        });
       }
     };
 
@@ -42,7 +40,7 @@ export function ExitIntentPopup() {
     };
 
     document.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
@@ -53,26 +51,20 @@ export function ExitIntentPopup() {
   const handleClose = () => {
     setShowPopup(false);
 
-    // Track popup dismissal
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'exit_intent_popup_dismissed', {
-        event_category: 'Conversion',
-        event_label: 'Exit Intent Popup'
-      });
-    }
+    trackEvent('exit_intent_popup_dismissed', {
+      event_category: 'Conversion',
+      event_label: 'Exit Intent Popup'
+    });
   };
 
   const handleCTAClick = () => {
     setShowPopup(false);
 
-    // Track CTA click
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'exit_intent_popup_cta_clicked', {
-        event_category: 'Conversion',
-        event_label: 'Exit Intent Popup',
-        event_value: 1
-      });
-    }
+    trackEvent('exit_intent_popup_cta_clicked', {
+      event_category: 'Conversion',
+      event_label: 'Exit Intent Popup',
+      event_value: 1
+    });
   };
 
   if (!showPopup) return null;

@@ -5,16 +5,6 @@ import { CtaPair } from "../../components/CtaPair";
 
 export default function WhyEmployerBrandsFail() {
   useEffect(() => {
-    document.title = "Why Most Employer Brands Fail Before They Launch | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "The problem usually isn't the creative. It's that the narrative was never pressure-tested against what candidates actually experience. Here's where the gap starts — and how to close it before launch day."
-      );
-    }
-
     // Add Article Schema
     const articleSchema = {
       "@context": "https://schema.org",

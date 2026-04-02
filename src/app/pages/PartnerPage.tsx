@@ -10,24 +10,6 @@ import { ContactSection } from "../components/ContactSection";
 
 export default function PartnerPage() {
   useEffect(() => {
-    // Set page metadata
-    document.title = "Thompson & Co Collective – Fractional Recruitment Marketing for Agency Partners";
-
-    // Meta description
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Thompson & Co Collective provides fractional talent attraction marketing and embedded recruitment marketing support for agency and consulting partners. Integrated partner support, not an outside vendor."
-      );
-    } else {
-      const meta = document.createElement("meta");
-      meta.name = "description";
-      meta.content =
-        "Thompson & Co Collective provides fractional talent attraction marketing and embedded recruitment marketing support for agency and consulting partners. Integrated partner support, not an outside vendor.";
-      document.head.appendChild(meta);
-    }
-
     // Add structured data for Organization
     const organizationSchema = {
       "@context": "https://schema.org",

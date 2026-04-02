@@ -5,16 +5,6 @@ import { CtaPair } from "../../components/CtaPair";
 
 export default function MostCompaniesAreAtStageOne() {
   useEffect(() => {
-    document.title = "Most Companies Are at Stage One. They Don't Know It. | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "After running the Talent Maturity Audit across dozens of organizations, a pattern is clear: the gap between where leadership thinks they are and where the evidence puts them is almost always wider than expected."
-      );
-    }
-
     // Add Article Schema
     const articleSchema = {
       "@context": "https://schema.org",

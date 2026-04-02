@@ -7,16 +7,6 @@ export default function CapabilitiesPage() {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = "Employer Brand Strategy & Recruitment Marketing Services | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Thompson & Co Collective delivers employer brand strategy, EVP development, recruitment marketing, and candidate experience design. A collective of industry veterans — accountable to your outcomes."
-      );
-    }
-
     // Track time on page
     const startTime = Date.now();
     return () => {

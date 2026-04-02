@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle2, Clock } from "lucide-react";
+import { trackEvent } from "../lib/analytics";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -12,18 +13,7 @@ export default function ContactPage() {
   });
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    document.title = "Contact – Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Start a conversation about your talent attraction challenges. We respond within 1 business day with a clear next step."
-      );
-    }
-  }, []);
+  const [submitErrorMessage, setSubmitErrorMessage] = useState("");
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -58,6 +48,7 @@ export default function ContactPage() {
     }
 
     setFormStatus("submitting");
+    setSubmitErrorMessage("");
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -69,16 +60,17 @@ export default function ContactPage() {
         throw new Error(`Contact submission failed with status ${response.status}`);
       }
 
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "contact_form_submitted", {
-          event_category: "Form",
-          event_label: "Contact Form",
-        });
-      }
+      trackEvent("contact_form_submitted", {
+        event_category: "Form",
+        event_label: "Contact Form",
+      });
 
       setFormStatus("success");
     } catch (error) {
       console.error("Contact form submission failed", error);
+      setSubmitErrorMessage(
+        "We couldn't send your message right now. Please try again in a moment, or email hello@thompsoncollective.co."
+      );
       setFormStatus("error");
     }
   };
@@ -258,7 +250,7 @@ export default function ContactPage() {
                 className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700"
                 style={{ fontFamily: "var(--font-sans)", fontSize: "0.9rem" }}
               >
-                We couldn't send your message right now. Please try again in a moment.
+                {submitErrorMessage || "We couldn't send your message right now. Please try again in a moment."}
               </div>
             )}
 
@@ -504,12 +496,10 @@ export default function ContactPage() {
               className="text-[#117C92] underline hover:text-[#0E5A6A] transition-colors"
               style={{ fontFamily: 'var(--font-sans)', fontSize: '0.9375rem', fontWeight: 500 }}
               onClick={() => {
-                if (typeof window !== "undefined" && (window as any).gtag) {
-                  (window as any).gtag("event", "calendly_clicked", {
-                    event_category: "External Link",
-                    event_label: "Calendly",
-                  });
-                }
+                trackEvent("calendly_clicked", {
+                  event_category: "External Link",
+                  event_label: "Calendly",
+                });
               }}
             >
               Book 20 minutes

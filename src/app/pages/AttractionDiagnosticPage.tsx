@@ -7,14 +7,6 @@ export default function AttractionDiagnosticPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    document.title = "Attraction Diagnostic | Thompson & Co Collective";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "The Attraction Diagnostic is our paid evidence pass across narrative, channels, candidate experience, and credibility governance — so the scope you invest in is grounded in reality, not assumptions."
-      );
-    }
     const startTime = Date.now();
     return () => {
       const timeOnPage = Math.floor((Date.now() - startTime) / 1000);

@@ -7,16 +7,6 @@ export default function OurApproachPage() {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = "How We Work | Employer Brand Methodology | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Our approach is built on a proprietary employer brand operating framework — designed to govern, measure, and sustain the story we build together. Discover, Diagnose, Activate, Measure & Optimize."
-      );
-    }
-
     // Track time on page
     const startTime = Date.now();
     return () => {

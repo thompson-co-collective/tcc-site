@@ -1,45 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://thompsoncollective.co/</loc>
+    <lastmod>2026-04-02</lastmod>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://thompsoncollective.co/about</loc>
+    <lastmod>2026-04-02</lastmod>
   </url>
 
   <url>
     <loc>https://thompsoncollective.co/capabilities</loc>
+    <lastmod>2026-04-02</lastmod>
   </url>
 
   <url>
     <loc>https://thompsoncollective.co/our-approach</loc>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://thompsoncollective.co/attraction-diagnostic</loc>
+    <lastmod>2026-04-02</lastmod>
   </url>
 
   <url>
     <loc>https://thompsoncollective.co/insights</loc>
+    <lastmod>2026-04-02</lastmod>
   </url>
 
   <url>
-    <loc>https://thompsoncollective.co/audit</loc>
+    <loc>https://thompsoncollective.co/insights/why-employer-brands-fail</loc>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://thompsoncollective.co/insights/job-board-strategy</loc>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://thompsoncollective.co/insights/talent-maturity-gap</loc>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://thompsoncollective.co/insights/hidden-cost-bad-hiring</loc>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+
+  <url>
+    <loc>https://thompsoncollective.co/insights/ai-search-optimization</loc>
+    <lastmod>2026-04-02</lastmod>
   </url>
 
   <url>
     <loc>https://thompsoncollective.co/contact</loc>
+    <lastmod>2026-04-02</lastmod>
   </url>
 
   <url>
     <loc>https://thompsoncollective.co/partner</loc>
+    <lastmod>2026-04-02</lastmod>
   </url>
 
   <url>
     <loc>https://thompsoncollective.co/privacy</loc>
+    <lastmod>2026-04-02</lastmod>
   </url>
 
   <url>
     <loc>https://thompsoncollective.co/terms</loc>
+    <lastmod>2026-04-02</lastmod>
   </url>
-
 </urlset>

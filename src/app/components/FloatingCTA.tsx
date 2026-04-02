@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { trackEvent } from '../lib/analytics';
 
 export function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,7 +12,7 @@ export function FloatingCTA() {
       setIsVisible(window.scrollY > 300);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -29,13 +30,10 @@ export function FloatingCTA() {
           boxShadow: '0 10px 25px rgba(17, 124, 146, 0.3)',
         }}
         onClick={() => {
-          // Track floating CTA click
-          if (typeof window !== 'undefined' && (window as any).gtag) {
-            (window as any).gtag('event', 'floating_cta_clicked', {
-              event_category: 'Conversion',
-              event_label: 'Mobile Floating CTA'
-            });
-          }
+          trackEvent('floating_cta_clicked', {
+            event_category: 'Conversion',
+            event_label: 'Mobile Floating CTA'
+          });
         }}
       >
         <span>Get My Baseline</span>

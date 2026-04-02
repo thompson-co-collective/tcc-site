@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { ExternalLink, CheckCircle } from 'lucide-react';
-import { useEffect } from 'react';
 
 // Page status types
 type PageStatus = 'live' | 'coming-soon';
@@ -14,27 +13,6 @@ interface PageInfo {
 }
 
 export default function SitemapPage() {
-  useEffect(() => {
-    document.title = "Sitemap | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Complete site navigation for Thompson & Co Collective. Find all pages, services, and resources for employer brand and recruitment marketing."
-      );
-    }
-    const metaRobots = document.querySelector('meta[name="robots"]');
-    if (metaRobots) {
-      metaRobots.setAttribute('content', 'noindex');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'robots';
-      meta.content = 'noindex';
-      document.head.appendChild(meta);
-    }
-  }, []);
-
   // Sitemap structure - update as pages launch
   const sitemap: PageInfo[] = [
     {
