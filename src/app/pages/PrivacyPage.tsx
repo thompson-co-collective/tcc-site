@@ -3,16 +3,6 @@ import { Link } from "react-router-dom";
 
 export default function PrivacyPage() {
   useEffect(() => {
-    document.title = "Privacy Policy | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Thompson & Co Collective privacy policy. We've written this policy to be readable — not to bury the important parts. Learn how we collect, use, and protect your information."
-      );
-    }
-
     // Scroll to top on page load
     window.scrollTo(0, 0);
   }, []);

@@ -5,16 +5,6 @@ import { CtaPair } from "../components/CtaPair";
 
 export default function InsightsPage() {
   useEffect(() => {
-    document.title = "Insights | The Collective POV | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Perspectives from Thompson & Co practitioners, curated industry research, and thinking worth your time on talent attraction, employer brand, and recruitment marketing."
-      );
-    }
-
     window.scrollTo(0, 0);
   }, []);
 

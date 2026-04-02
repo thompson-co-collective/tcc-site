@@ -5,16 +5,6 @@ import { CtaPair } from "../../components/CtaPair";
 
 export default function TheQuietCollapseOfJobBoardStrategy() {
   useEffect(() => {
-    document.title = "The Quiet Collapse of the Job Board Strategy | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Organizations are spending more on job distribution and getting fewer qualified applicants. The data is consistent. The cause is structural, not cyclical. What's actually happening — and what replaces it."
-      );
-    }
-
     // Add Article Schema
     const articleSchema = {
       "@context": "https://schema.org",

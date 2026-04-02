@@ -204,27 +204,6 @@ export default function TalentAudit() {
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  // Set document title
-  useEffect(() => {
-    document.title = 'Talent Maturity Audit | Thompson & Co Collective';
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Assess your organization's talent attraction maturity. Get a baseline diagnostic and clear next steps for employer brand and recruitment marketing improvement."
-      );
-    }
-    const metaRobots = document.querySelector('meta[name="robots"]');
-    if (metaRobots) {
-      metaRobots.setAttribute('content', 'noindex');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'robots';
-      meta.content = 'noindex';
-      document.head.appendChild(meta);
-    }
-  }, []);
-
   // Persist UTMs on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);

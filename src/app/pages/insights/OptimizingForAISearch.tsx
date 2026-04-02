@@ -5,16 +5,6 @@ import { CtaPair } from "../../components/CtaPair";
 
 export default function OptimizingForAISearch() {
   useEffect(() => {
-    document.title = "Optimizing for AI Search: Answer Engine Optimization | Thompson & Co Collective";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Google's AI answers are changing how candidates find employers. Here's how to optimize your employer brand content for AI search engines and featured snippets."
-      );
-    }
-
     // Add Article Schema
     const articleSchema = {
       "@context": "https://schema.org",
