@@ -5,6 +5,7 @@ import { GlobalHeader } from "./components/GlobalHeader";
 import { GlobalFooter } from "./components/GlobalFooter";
 import { ExitIntentPopup } from "./components/ExitIntentPopup";
 import { FloatingCTA } from "./components/FloatingCTA";
+import { PageViewTracker } from "./components/PageViewTracker";
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -64,8 +65,7 @@ export default function App() {
         <div className="min-h-screen bg-white">
           <SkipLink />
           <ScrollToTop />
-          {/* PageViewTracker temporarily disabled to isolate runtime crash */}
-          {/* <PageViewTracker /> */}
+          <PageViewTracker />
 
           <GlobalHeader />
 
