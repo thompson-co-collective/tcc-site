@@ -29,61 +29,9 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-  <!-- Organization Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Thompson & Co Collective",
-    "url": "https://thompsoncollective.co",
-    "logo": "https://thompsoncollective.co/logo.png",
-    "description": "Strategic employer branding and recruitment marketing that moves hiring outcomes. EVP development, candidate experience, and media governance that drives measurable results.",
-    "founder": {
-      "@type": "Person",
-      "name": "Candice Thompson",
-      "jobTitle": "Founder & Principal Consultant"
-    },
-    "knowsAbout": [
-      "Employer brand strategy",
-      "Recruitment marketing governance",
-      "Candidate experience design",
-      "Employee value proposition development",
-      "Talent attraction analytics",
-      "AI visibility for employer brand"
-    ],
-    "sameAs": [
-      "https://www.linkedin.com/company/thompson-collective"
-    ]
-  }
-  </script>
-
-  <!-- Website Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Thompson & Co Collective",
-    "url": "https://thompsoncollective.co",
-    "description": "Employer brand and recruitment marketing consultancy."
-  }
-  </script>
-
-  <!-- Google Analytics -->
+  <!-- GA4 baseline only (no ads/remarketing signals) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XR2CJ9LZ2Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', {
-      'ad_storage': 'granted',
-      'analytics_storage': 'granted'
-    });
-    gtag('js', new Date());
-    gtag('config', 'G-XR2CJ9LZ2Z');
-  </script>
-
-  <!-- Cloudflare Web Analytics -->
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4179c96c2a9d4750a98151fa0d12d007"}'></script>
-  <!-- End Cloudflare Web Analytics -->
+  <script defer src="/ga4-init.js"></script>
 </head>
 
 <body>
