@@ -1,9 +1,42 @@
+# ============================================================================
+# CSP DECISION LOG — 2026-04-13
+# ----------------------------------------------------------------------------
+# STATUS: Temporary production bridge
+#
+# REASON: gtag.js injects runtime inline scripts that cannot be pre-hashed.
+# Cloudflare Pages injects per-request challenge scripts with changing hashes.
+# Both make pure hash-based script-src impossible on static hosting.
+# 'unsafe-inline' in script-src is the documented Google recommendation
+# for sites using gtag.js without server-side nonce capability.
+# Ref: https://developers.google.com/tag-platform/security/guides/csp
+#
+# ADDITIONAL CONTEXT: GA property G-XR2CJ9LZ2Z is linked to Google Ads
+# conversion tag AW-11518581694. That tag loads Facebook Pixel, Pinterest
+# Tag, and Bing UET at runtime via GTM. All domains below were derived
+# from actual CSP violation logs dated 2026-04-13.
+#
+# TARGET: Replace with nonce-based CSP via Cloudflare Worker.
+# Backlog: "Replace temporary CSP unsafe-inline bridge with Worker
+#          nonce-based CSP (strict-dynamic + per-request nonce)"
+#
+# SCOPE OF TEMPORARY RELAXATION:
+#   - 'unsafe-inline' added ONLY to script-src
+#   - Every domain listed was validated against actual error logs
+#   - No wildcards except where Google uses subdomain-based routing
+#
+# VALIDATION CHECKLIST (run after every deploy):
+#   [ ] No CSP errors in browser DevTools console
+#   [ ] Network tab: filter "collect" — requests completing (200)
+#   [ ] GA4 > Realtime: showing pageview activity
+#   [ ] Cloudflare Web Analytics dashboard: receiving data
+# ============================================================================
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://www.facebook.com https://analytics.google.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com https://googleads.g.doubleclick.net https://connect.facebook.net https://s.pinimg.com https://bat.bing.com https://capi-automation.s3.us-east-2.amazonaws.com https://www.google.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://www.google.com https://googleads.g.doubleclick.net https://connect.facebook.net https://www.facebook.com https://bat.bing.com https://ct.pinterest.com https://capi-automation.s3.us-east-2.amazonaws.com https://cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
 
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
