@@ -1,0 +1,11 @@
+[[http]]
+  # The script will be accessible at https://your_worker_name.workers.dev/api/contact
+  route = "example.com/api/contact"
+  service = "your_worker_name"
+  script = "api/contact.js"
+
+[[http]]
+  # The script will be accessible at https://your_worker_name.workers.dev/api/audit-email
+  route = "example.com/api/audit-email"
+  service = "your_worker_name"
+  script = "api/audit-email.js"
