@@ -1,9 +1,38 @@
+# ============================================================================
+# CSP DECISION LOG — 2026-04-13
+# ----------------------------------------------------------------------------
+# STATUS: Temporary production bridge
+# REASON: gtag.js injects runtime inline scripts (innerHTML) that cannot be
+#         pre-hashed. Cloudflare Pages also injects a per-request challenge
+#         script with a different hash on every response. Both make a pure
+#         hash-based script-src impossible on static hosting without a Worker.
+#
+# 'unsafe-inline' in script-src is the documented Google recommendation for
+# sites using gtag.js without server-side nonce capability.
+# Ref: https://developers.google.com/tag-platform/security/guides/csp
+#
+# TARGET: Replace with nonce-based CSP via Cloudflare Worker.
+#         Backlog item: "Replace temporary CSP unsafe-inline bridge with
+#         Worker nonce-based CSP (strict-dynamic + per-request nonce)"
+#
+# SCOPE OF TEMPORARY RELAXATION:
+#   - 'unsafe-inline' added ONLY to script-src
+#   - All other directives remain locked down
+#   - No wildcard domains — only exact hosts required by GA + Cloudflare
+#
+# VALIDATION CHECKLIST (run after every deploy):
+#   [ ] No CSP errors in browser console
+#   [ ] Network tab shows GA collect requests firing
+#   [ ] GA4 Realtime shows pageview activity
+#   [ ] Cloudflare Web Analytics dashboard receiving data
+# ============================================================================
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; script-src 'self' 'sha256-LPyJfEsXmnB6GfmLskNKEkO4NEnteTvOZjemfkIC44Q=' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
 
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
