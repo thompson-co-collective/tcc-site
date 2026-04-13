@@ -1,0 +1,8 @@
+# Cloudflare Workers Configuration
+
+[[routes]]
+pattern = "/api/contact"
+  
+[[routes]]
+pattern = "/api/audit-email"
+  
