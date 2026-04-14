@@ -29,19 +29,42 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-  <!-- GA4 baseline only (no ads/remarketing signals) -->
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id=GTM-T2V6LFPF'+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T2V6LFPF');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- GA4 baseline only (temporary – will be removed after GTM validation) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XR2CJ9LZ2Z"></script>
   <script defer src="/ga4-init.js"></script>
 </head>
 
 <body>
-  <div id="root"></div>
+  <!-- Google Tag Manager (noscript) -->
   <noscript>
-    <p>This site requires JavaScript to render interactive content. Core pages: <a href="/">Home</a>, <a href="/capabilities">Capabilities</a>, <a href="/our-approach">Our Approach</a>, <a href="/insights">Insights</a>, <a href="/contact">Contact</a>.</p>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T2V6LFPF"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div id="root"></div>
+
+  <noscript>
+    <p>This site requires JavaScript to render interactive content. Core pages: 
+      <a href="/">Home</a>, 
+      <a href="/capabilities">Capabilities</a>, 
+      <a href="/our-approach">Our Approach</a>, 
+      <a href="/insights">Insights</a>, 
+      <a href="/contact">Contact</a>.
+    </p>
   </noscript>
 
   <!-- CORRECT ENTRY POINT -->
   <script type="module" src="/src/main.tsx"></script>
-
 </body>
 </html>
