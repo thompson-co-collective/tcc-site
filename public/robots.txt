@@ -1,13 +1,17 @@
 User-agent: *
 Allow: /
 
+# AI crawlers (explicitly allowed for clarity + future control)
 User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
 Allow: /
 
 User-agent: Google-Extended
 Allow: /
 
-User-agent: ClaudeBot
+User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://thompsoncollective.co/sitemap.xml
