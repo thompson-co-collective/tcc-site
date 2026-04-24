@@ -51,9 +51,9 @@
   --accentHero2: #0E5A6A;
   
   /* Typography */
-  --font-serif: 'Instrument Serif', 'Playfair Display', Georgia, serif;
-  --font-serif-alt: 'Instrument Serif', 'Playfair Display', Georgia, serif;
-  --font-sans: 'Instrument Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-serif-alt: 'Crimson Text', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-script: 'Dancing Script', cursive;
 }
 
