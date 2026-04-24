@@ -257,21 +257,6 @@ export default function HomePage() {
             <CtaPair variant="light" />
           </div>
 
-          {/* Urgency & Social Proof */}
-          <div className="mt-8 text-center animate-fadeInCTA" style={{ animationDelay: '0.2s' }}>
-            <p className="text-white/60 text-sm mb-2">
-              Join 200+ organizations who've improved their hiring outcomes
-            </p>
-            <div className="flex items-center justify-center gap-4 text-xs text-white/40">
-              <span>⚡ Free assessment</span>
-              <span>•</span>
-              <span>📊 Actionable insights</span>
-              <span>•</span>
-              <span>🎯 No sales pitch</span>
-            </div>
-          </div>
-        </div>
-
         {/* Animation styles */}
         <style>{`
           @keyframes fadeInUpCalm {
