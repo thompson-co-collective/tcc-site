@@ -4,8 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <!-- Content Security Policy: Allows GTM and Microsoft Clarity -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms; connect-src 'self' https://*.c.bing.com https://*.clarity.ms https://www.google-analytics.com;">
+  <!-- Updated Content Security Policy: Grants access to all your marketing tools and fonts -->
+  <meta http-equiv="Content-Security-Policy" content="
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 
+      https://www.googletagmanager.com 
+      https://www.clarity.ms 
+      https://js.hs-scripts.com 
+      https://js.hs-analytics.net 
+      https://js.hscollectedforms.net 
+      https://googleads.g.doubleclick.net 
+      https://www.google-analytics.com 
+      https://*.google.com;
+    style-src 'self' 'unsafe-inline' 
+      https://fonts.googleapis.com;
+    font-src 'self' 
+      https://fonts.gstatic.com data:;
+    connect-src 'self' 
+      https://*.clarity.ms 
+      https://*.c.bing.com 
+      https://*.google-analytics.com 
+      https://*.analytics.google.com 
+      https://*.g.doubleclick.net 
+      https://*.hubspot.com;
+    img-src 'self' data: 
+      https://www.googletagmanager.com 
+      https://*.google-analytics.com 
+      https://*.clarity.ms 
+      https://*.doubleclick.net;
+  ">
 
   <title>Thompson & Co Collective</title>
   <meta name="description" content="Employer branding and recruitment marketing that moves hiring outcomes. EVP, candidate experience, and media that drives measurable results." />
@@ -25,7 +51,7 @@
   <meta property="twitter:description" content="Strategic employer branding and recruitment marketing that moves hiring outcomes. EVP development, candidate experience, and media governance that drives measurable results." />
   <meta property="twitter:image" content="https://thompsoncollective.co/logo.png" />
 
-  <!-- Preconnect to external domains -->
+  <!-- Preconnect to external domains for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -34,7 +60,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-  <!-- Google Tag Manager -->
+  <!-- Google Tag Manager: Centralized script for metrics -->
   <script>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -43,6 +69,9 @@
     })(window,document,'script','dataLayer','GTM-T2V6LFPF');
   </script>
   <!-- End Google Tag Manager -->
+
+  <!-- Production Stylesheet -->
+  <link rel="stylesheet" crossorigin href="/assets/index-qM5eebup.css">
 </head>
 
 <body>
@@ -65,7 +94,7 @@
     </p>
   </noscript>
 
-  <!-- Production build entry point (Updated from your previous file) -->
+  <!-- Production build entry point -->
   <script type="module" crossorigin src="/assets/index-CAhLMeZE.js"></script>
 </body>
 </html>
