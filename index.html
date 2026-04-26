@@ -4,33 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <!-- Updated Content Security Policy: Grants access to all your marketing tools and fonts -->
+  <!-- Content Security Policy: Allows GTM proxy and all marketing tool scripts -->
   <meta http-equiv="Content-Security-Policy" content="
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' 
-      https://www.googletagmanager.com 
-      https://www.clarity.ms 
-      https://js.hs-scripts.com 
-      https://js.hs-analytics.net 
-      https://js.hscollectedforms.net 
-      https://googleads.g.doubleclick.net 
-      https://www.google-analytics.com 
-      https://*.google.com;
-    style-src 'self' 'unsafe-inline' 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval'
+      https://www.googletagmanager.com
+      https://www.clarity.ms
+      https://js.hs-scripts.com
+      https://js.hs-analytics.net
+      https://js.hscollectedforms.net
+      https://googleads.g.doubleclick.net
+      https://www.google-analytics.com
+      https://*.google.com
+      https://connect.facebook.net
+      https://bat.bing.com;
+    style-src 'self' 'unsafe-inline'
       https://fonts.googleapis.com;
-    font-src 'self' 
+    font-src 'self'
       https://fonts.gstatic.com data:;
-    connect-src 'self' 
-      https://*.clarity.ms 
-      https://*.c.bing.com 
-      https://*.google-analytics.com 
-      https://*.analytics.google.com 
-      https://*.g.doubleclick.net 
+    connect-src 'self'
+      https://*.clarity.ms
+      https://*.c.bing.com
+      https://*.google-analytics.com
+      https://*.analytics.google.com
+      https://*.g.doubleclick.net
+      https://*.hubspot.com
+      https://*.hs-analytics.net
+      https://*.hscollectedforms.net
+      https://connect.facebook.net;
+    img-src 'self' data:
+      https://www.googletagmanager.com
+      https://*.google-analytics.com
+      https://*.clarity.ms
+      https://*.doubleclick.net
+      https://*.facebook.com
       https://*.hubspot.com;
-    img-src 'self' data: 
-      https://www.googletagmanager.com 
-      https://*.google-analytics.com 
-      https://*.clarity.ms 
-      https://*.doubleclick.net;
+    frame-src 'self'
+      https://www.googletagmanager.com
+      https://thompsoncollective.co;
   ">
 
   <title>Thompson & Co Collective</title>
@@ -60,12 +70,12 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-  <!-- Google Tag Manager: Centralized script for metrics -->
+  <!-- Google Tag Manager (proxied through thompsoncollective.co/analytics) -->
   <script>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    'https://thompsoncollective.co/analytics/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-T2V6LFPF');
   </script>
   <!-- End Google Tag Manager -->
@@ -75,9 +85,9 @@
 </head>
 
 <body>
-  <!-- Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript, proxied) -->
   <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T2V6LFPF"
+    <iframe src="https://thompsoncollective.co/analytics/ns.html?id=GTM-T2V6LFPF"
     height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
   <!-- End Google Tag Manager (noscript) -->
@@ -98,3 +108,4 @@
   <script type="module" crossorigin src="/assets/index-CAhLMeZE.js"></script>
 </body>
 </html>
+
