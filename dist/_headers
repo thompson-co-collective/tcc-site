@@ -1,9 +1,13 @@
+# CSP for GTM proxy + all marketing tools (2026-04-26)
+# Note: script-src/connect-src use https: to avoid whack-a-mole with GTM-loaded domains.
+# Proper fix: nonce-based CSP via Worker (see WIP)
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' https:; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; frame-src 'self' https://*.googletagmanager.com https://thompsoncollective.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
 
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
