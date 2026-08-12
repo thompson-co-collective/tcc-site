@@ -22,7 +22,7 @@ interface AuditState {
 // Constants
 const STORAGE_KEY = 'tcc_audit_v3';
 const UTM_STORAGE_KEY = 'tcc_audit_utms';
-const CALENDLY_URL = 'https://calendly.com/candice-thompsoncollective/clarity-call';
+const BOOKING_URL = 'https://calendar.app.google/YYzRyc23vQ1ywk3P7';
 
 const QUESTIONS = [
   'We have defined 12–18 month hiring priorities tied to business strategy, and we review them quarterly.',
@@ -1611,7 +1611,7 @@ export default function TalentAudit() {
                 Book a 30-minute discussion to translate your score into a tailored roadmap.
               </p>
               <a
-                href={CALENDLY_URL}
+                href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleCalendlyClick}
