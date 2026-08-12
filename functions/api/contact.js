@@ -84,18 +84,18 @@ export async function onRequestPost({ request }) {
 
     const { firstName, lastName } = parseName(name);
     const fields = [
-      { name: "firstname", value: firstName },
-      { name: "email", value: email },
-      { name: "company", value: company },
-      { name: "service_need", value: needHelp },
+      { objectTypeId: "0-1", name: "firstname", value: firstName },
+      { objectTypeId: "0-1", name: "email", value: email },
+      { objectTypeId: "0-2", name: "name", value: company },
+      { objectTypeId: "0-1", name: "service_need", value: needHelp },
     ];
 
     if (lastName) {
-      fields.push({ name: "lastname", value: lastName });
+      fields.push({ objectTypeId: "0-1", name: "lastname", value: lastName });
     }
 
     if (message) {
-      fields.push({ name: "message", value: message });
+      fields.push({ objectTypeId: "0-1", name: "message", value: message });
     }
 
     const hubspotContext = {
