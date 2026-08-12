@@ -10,6 +10,7 @@ export default function ContactPage() {
     company: "",
     needHelp: "",
     message: "",
+    website: "",
   });
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -244,6 +245,28 @@ export default function ContactPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: "-10000px",
+                width: "1px",
+                height: "1px",
+                overflow: "hidden",
+              }}
+            >
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             {formStatus === "error" && (
               <div
                 role="alert"
