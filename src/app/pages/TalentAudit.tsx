@@ -199,6 +199,8 @@ export default function TalentAudit() {
   const [showBaselineMessage, setShowBaselineMessage] = useState(false);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailValue, setEmailValue] = useState('');
+  const [isStarting, setIsStarting] = useState(false);
+  const [startSubmitError, setStartSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailSubmitError, setEmailSubmitError] = useState('');
 
@@ -265,9 +267,48 @@ export default function TalentAudit() {
   };
 
   // Start audit
-  const handleStartAudit = () => {
-    setState((prev: AuditState) => ({ ...prev, stage: 'questions' }));
-    trackEvent('audit_started', { page: '/audit', cta_name: 'Start Audit' });
+  const handleStartAudit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const email = emailValue.trim().toLowerCase();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStartSubmitError('Enter a valid work email to begin.');
+      return;
+    }
+
+    setIsStarting(true);
+    setStartSubmitError('');
+
+    try {
+      let utms: Record<string, string> = {};
+      try {
+        utms = JSON.parse(sessionStorage.getItem(UTM_STORAGE_KEY) || '{}');
+      } catch {
+        utms = {};
+      }
+
+      const response = await fetch('/api/audit-start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, utms }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Audit start submission failed with status ${response.status}`);
+      }
+
+      setEmailValue(email);
+      setState((prev: AuditState) => ({ ...prev, stage: 'questions' }));
+      trackEvent('audit_started', { page: '/audit', cta_name: 'Start Audit' });
+    } catch (error) {
+      setStartSubmitError('We could not start the audit right now. Please try again.');
+      trackEvent('audit_start_failed', {
+        page: '/audit',
+        reason: error instanceof Error ? error.message : 'unknown_error',
+      });
+    } finally {
+      setIsStarting(false);
+    }
   };
 
   // Update answer
@@ -700,11 +741,43 @@ export default function TalentAudit() {
                   </li>
                 </ul>
 
-                {/* CTA */}
-                <div className="text-center">
+                {/* Email gate */}
+                <form onSubmit={handleStartAudit} className="max-w-md mx-auto">
+                  <label
+                    htmlFor="audit-start-email"
+                    className="block mb-2 text-left"
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '0.875rem',
+                      fontWeight: 600,
+                      color: '#0A1220',
+                    }}
+                  >
+                    Work email
+                  </label>
+                  <input
+                    id="audit-start-email"
+                    type="email"
+                    value={emailValue}
+                    onChange={(e) => {
+                      setEmailValue(e.target.value);
+                      if (startSubmitError) setStartSubmitError('');
+                    }}
+                    placeholder="you@company.com"
+                    autoComplete="email"
+                    required
+                    aria-describedby={startSubmitError ? 'audit-start-error' : 'audit-start-note'}
+                    className="w-full px-4 py-3 mb-3 rounded-md border border-gray-300 bg-white text-[#0A1220] focus:outline-none focus:ring-2 focus:ring-[#117C92] focus:border-transparent"
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '1rem',
+                      minHeight: '48px',
+                    }}
+                  />
                   <button
-                    onClick={handleStartAudit}
-                    className="inline-flex items-center justify-center px-8 py-4 rounded-md bg-[#117C92] text-white hover:bg-[#0E5A6A] transition-all shadow-sm hover:shadow-md group"
+                    type="submit"
+                    disabled={isStarting}
+                    className="w-full inline-flex items-center justify-center px-8 py-4 rounded-md bg-[#117C92] text-white hover:bg-[#0E5A6A] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md group"
                     style={{
                       fontFamily: 'var(--font-serif)',
                       fontSize: '1.0625rem',
@@ -712,23 +785,40 @@ export default function TalentAudit() {
                       minHeight: '48px',
                     }}
                   >
-                    Get your baseline
-                    <ArrowRight
-                      className="ml-2 group-hover:translate-x-1 transition-transform"
-                      size={20}
-                    />
+                    {isStarting ? 'Starting…' : 'Get your baseline'}
+                    {!isStarting && (
+                      <ArrowRight
+                        className="ml-2 group-hover:translate-x-1 transition-transform"
+                        size={20}
+                      />
+                    )}
                   </button>
+                  {startSubmitError && (
+                    <p
+                      id="audit-start-error"
+                      role="alert"
+                      className="mt-3 text-left"
+                      style={{
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.8125rem',
+                        color: '#B91C1C',
+                      }}
+                    >
+                      {startSubmitError}
+                    </p>
+                  )}
                   <p
-                    className="mt-3"
+                    id="audit-start-note"
+                    className="mt-3 text-center"
                     style={{
                       fontFamily: 'var(--font-sans)',
                       fontSize: '0.8125rem',
                       color: '#9CA3AF',
                     }}
                   >
-                    Instant results.
+                    Instant results. We'll use your email to deliver your completed results.
                   </p>
-                </div>
+                </form>
               </div>
             </div>
           </>
