@@ -1,6 +1,8 @@
 const HUBSPOT_PORTAL_ID = "244175001";
 const HUBSPOT_FORM_ID = "01b8a813-169f-4b61-835a-5b556228bbb4";
 const HUBSPOT_SUBMIT_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`;
+const HUBSPOT_TIMEOUT_MS = 8000;
+const CONTACT_ACCEPTANCE_COOKIE = "tcc_contact_accepted";
 
 const SERVICE_NEEDS = new Set([
   "funnel-conversion",
@@ -12,14 +14,25 @@ const SERVICE_NEEDS = new Set([
   "not-sure",
 ]);
 
-function jsonResponse(body, status = 200) {
+const LATEST_ATTRIBUTION_FIELDS = [
+  { cookie: "tcc_attr_latest_source", property: "tcc_latest_utm_source" },
+  { cookie: "tcc_attr_latest_medium", property: "tcc_latest_utm_medium" },
+  { cookie: "tcc_attr_latest_campaign", property: "tcc_latest_utm_campaign" },
+];
+
+function jsonResponse(body, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "no-store",
+      ...extraHeaders,
     },
   });
+}
+
+function acceptanceCookie(accepted) {
+  return `${CONTACT_ACCEPTANCE_COOKIE}=${accepted ? "1" : ""}; Path=/; Max-Age=${accepted ? "60" : "0"}; SameSite=Lax; Secure`;
 }
 
 function parseName(fullName) {
@@ -41,18 +54,51 @@ function getCookie(request, name) {
   for (const cookie of cookies.split(";")) {
     const [cookieName, ...valueParts] = cookie.trim().split("=");
     if (cookieName === name) {
-      return decodeURIComponent(valueParts.join("="));
+      try {
+        return decodeURIComponent(valueParts.join("="));
+      } catch {
+        return "";
+      }
     }
   }
 
   return "";
 }
 
+function sanitizeAttribution(value) {
+  if (typeof value !== "string") return "";
+
+  const cleaned = value
+    .trim()
+    .replace(/[\u0000-\u001F\u007F]/g, "")
+    .slice(0, 160);
+
+  if (!cleaned || cleaned.includes("@")) return "";
+  return cleaned;
+}
+
+function appendLatestAttributionFields(request, fields) {
+  for (const mapping of LATEST_ATTRIBUTION_FIELDS) {
+    const value = sanitizeAttribution(getCookie(request, mapping.cookie));
+    if (!value) continue;
+
+    fields.push({
+      objectTypeId: "0-1",
+      name: mapping.property,
+      value,
+    });
+  }
+}
+
 export async function onRequestPost({ request }) {
   try {
     const contentType = request.headers.get("Content-Type") || "";
     if (!contentType.includes("application/json")) {
-      return jsonResponse({ error: "Unsupported request format." }, 415);
+      return jsonResponse(
+        { ok: false, accepted: false, outcome: "invalid_request", error: "Unsupported request format." },
+        415,
+        { "Set-Cookie": acceptanceCookie(false) }
+      );
     }
 
     const body = await request.json();
@@ -63,9 +109,13 @@ export async function onRequestPost({ request }) {
     const message = typeof body.message === "string" ? body.message.trim() : "";
     const website = typeof body.website === "string" ? body.website.trim() : "";
 
-    // Honeypot: legitimate visitors never see or fill this field.
+    // Honeypot: keep the response neutral to automated submitters, but never mark it accepted.
     if (website) {
-      return jsonResponse({ ok: true });
+      return jsonResponse(
+        { ok: true, accepted: false, outcome: "filtered" },
+        200,
+        { "Set-Cookie": acceptanceCookie(false) }
+      );
     }
 
     if (
@@ -79,7 +129,11 @@ export async function onRequestPost({ request }) {
       !SERVICE_NEEDS.has(needHelp) ||
       message.length > 4000
     ) {
-      return jsonResponse({ error: "Please check the form fields and try again." }, 400);
+      return jsonResponse(
+        { ok: false, accepted: false, outcome: "invalid_request", error: "Please check the form fields and try again." },
+        400,
+        { "Set-Cookie": acceptanceCookie(false) }
+      );
     }
 
     const { firstName, lastName } = parseName(name);
@@ -98,6 +152,10 @@ export async function onRequestPost({ request }) {
       fields.push({ objectTypeId: "0-1", name: "message", value: message });
     }
 
+    // Write only latest custom attribution here. Custom first-touch fields require a true
+    // conditional write mechanism so returning contacts can never overwrite first touch.
+    appendLatestAttributionFields(request, fields);
+
     const hubspotContext = {
       pageName: "Contact – Thompson & Co Collective",
       pageUri: "https://thompsoncollective.co/contact",
@@ -113,32 +171,69 @@ export async function onRequestPost({ request }) {
       hubspotContext.ipAddress = visitorIp;
     }
 
-    const hubspotResponse = await fetch(HUBSPOT_SUBMIT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        submittedAt: String(Date.now()),
-        fields,
-        context: hubspotContext,
-      }),
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), HUBSPOT_TIMEOUT_MS);
+    let hubspotResponse;
+
+    try {
+      hubspotResponse = await fetch(HUBSPOT_SUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          submittedAt: String(Date.now()),
+          fields,
+          context: hubspotContext,
+        }),
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timeoutId);
+    }
 
     if (!hubspotResponse.ok) {
       console.error("HubSpot form submission failed", {
         status: hubspotResponse.status,
       });
-      return jsonResponse({ error: "The form could not be submitted." }, 502);
+
+      const outcome = hubspotResponse.status === 429 ? "rate_limited" : "upstream_rejected";
+      const status = hubspotResponse.status === 429 ? 503 : 502;
+
+      return jsonResponse(
+        { ok: false, accepted: false, outcome, error: "The form could not be submitted." },
+        status,
+        { "Set-Cookie": acceptanceCookie(false) }
+      );
     }
 
-    return jsonResponse({ ok: true });
+    return jsonResponse(
+      { ok: true, accepted: true, outcome: "accepted" },
+      200,
+      { "Set-Cookie": acceptanceCookie(true) }
+    );
   } catch (error) {
+    const isTimeout = error instanceof Error && error.name === "AbortError";
+
     console.error("Contact form handler failed", {
-      message: error instanceof Error ? error.message : "Unknown error",
+      errorType: isTimeout ? "timeout" : "handler_error",
     });
-    return jsonResponse({ error: "The form could not be submitted." }, 500);
+
+    return jsonResponse(
+      {
+        ok: false,
+        accepted: false,
+        outcome: isTimeout ? "timeout" : "upstream_unavailable",
+        error: "The form could not be submitted.",
+      },
+      503,
+      { "Set-Cookie": acceptanceCookie(false) }
+    );
   }
 }
 
 export function onRequest() {
-  return jsonResponse({ error: "Method not allowed." }, 405);
+  return jsonResponse(
+    { ok: false, accepted: false, outcome: "method_not_allowed", error: "Method not allowed." },
+    405,
+    { "Set-Cookie": acceptanceCookie(false) }
+  );
 }
