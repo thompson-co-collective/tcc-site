@@ -12,7 +12,7 @@
 - Build tooling: Vite 6, `@vitejs/plugin-react`, terser minification, manual chunk splitting.
 - Styling: Tailwind CSS 4, `tw-animate-css`, custom theme/fonts CSS.
 - UI libs: Radix UI primitives/components, Lucide icons, multiple utility UI components.
-- Analytics: Google Analytics (`gtag`) and Cloudflare Web Analytics beacon.
+- Analytics: Google Tag Manager (`GTM-T2V6LFPF`) routes events to the approved GA4 destination (`G-KX2MNYPYBS`) through the server endpoint, alongside the Cloudflare Web Analytics beacon.
 
 ## Deployment Model
 - Static build (`npm run build` → `dist`) configured for Cloudflare Pages via `wrangler.jsonc` (`pages_build_output_dir: ./dist`).
@@ -36,7 +36,7 @@
 - `node_modules/` — dependencies.
 
 ## Important Root Files
-- `index.html` — HTML shell, root mount node, baseline SEO/social tags, JSON-LD, analytics scripts, and module entry script.
+- `index.html` — HTML shell, root mount node, baseline SEO/social tags, canonical GTM loader, and module entry script.
 - `package.json` — dependencies, scripts (`dev`, `build`), tooling versions.
 - `vite.config.ts` — plugin setup, path aliasing (`@ -> ./src`), build optimization/chunking.
 - `wrangler.jsonc` — Cloudflare Pages deployment config.
@@ -85,9 +85,11 @@
   - theme tokens (`theme.css`)
 
 ## Analytics
-- GA4 script is loaded in `index.html` (`G-XR2CJ9LZ2Z`) and initializes `window.dataLayer` + `gtag`.
-- Cloudflare Web Analytics beacon is loaded in `index.html` with a site token.
-- In-app event tracking uses conditional `(window as any).gtag(...)` checks in multiple components/pages.
+- `index.html` loads the canonical GTM container (`GTM-T2V6LFPF`) through the proxied `/analytics` route.
+- GTM routes approved events to GA4 (`G-KX2MNYPYBS`) through `https://metrics.thompsoncollective.co`.
+- The retired standalone GA4 initializer is not part of the site architecture.
+- Cloudflare Web Analytics remains separate from the GTM/GA4 attribution path.
+- In-app tracking pushes named events to the shared analytics layer.
 - Central route-based tracker: `src/app/components/PageViewTracker.tsx` emits `page_view` on router location change.
 
 ## Deployment Configuration

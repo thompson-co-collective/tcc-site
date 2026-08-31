@@ -12,10 +12,10 @@
 - Removed `<GoogleAnalytics />` component from render tree
 - Removed `<DiagnosticChecker />` component from render tree
 
-### 3. ✅ Verified No Other gtag('consent', 'default') References
-- Searched entire codebase
-- **Zero matches found** for `gtag('consent', 'default')`
-- Only references are in documentation files (markdown)
+### 3. ✅ Retired the legacy direct GA4 configuration
+- Removed the standalone GA4 initializer from `public/`
+- Removed the direct GA4 loader from the tracked production artifact
+- The site now has one analytics entry point: Google Tag Manager
 
 ### 4. ⚠️ No public/index.html File Exists
 - This Vite project **does not use** a static `index.html` template
@@ -45,38 +45,14 @@ This indicates the old script is coming from:
 
 ## Recommended Next Steps:
 
-### Option A: Add GA to Vite's HTML Entry Point
-Since there's no `index.html`, you need to create one:
+### Option A: Use the canonical GTM entry point
+The root `index.html` is the source of truth. It loads only:
 
-**Create `/index.html` in project root:**
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XR2CJ9LZ2Z"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('consent', 'default', {
-        'ad_storage': 'granted',
-        'analytics_storage': 'granted'
-      });
-      gtag('js', new Date());
-      gtag('config', 'G-XR2CJ9LZ2Z');
-    </script>
-    
-    <title>Thompson & Co Collective</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/app/main.tsx"></script>
-  </body>
-</html>
-```
+- GTM container: `GTM-T2V6LFPF`
+- Approved GA4 destination (managed in GTM): `G-KX2MNYPYBS`
+- Server endpoint: `https://metrics.thompsoncollective.co`
+
+Do not add a separate `gtag.js` loader or hardcode a second GA4 measurement ID in the site.
 
 ### Option B: Check Deployment Platform
 If deployed, check:
