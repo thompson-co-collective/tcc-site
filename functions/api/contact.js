@@ -2,8 +2,6 @@ const HUBSPOT_PORTAL_ID = "244175001";
 const HUBSPOT_FORM_ID = "01b8a813-169f-4b61-835a-5b556228bbb4";
 const HUBSPOT_SUBMIT_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`;
 const HUBSPOT_TIMEOUT_MS = 8000;
-const CONTACT_ACCEPTANCE_COOKIE = "tcc_contact_accepted";
-const QA_SIMULATION_HEADER = "X-TCC-QA-Simulate";
 
 const SERVICE_NEEDS = new Set([
   "funnel-conversion",
@@ -15,46 +13,20 @@ const SERVICE_NEEDS = new Set([
   "not-sure",
 ]);
 
-const QA_SIMULATION_MODES = new Set([
-  "upstream_rejected",
-  "upstream_unavailable",
-  "timeout",
-]);
-
 const LATEST_ATTRIBUTION_FIELDS = [
   { cookie: "tcc_attr_latest_source", property: "tcc_latest_utm_source" },
   { cookie: "tcc_attr_latest_medium", property: "tcc_latest_utm_medium" },
   { cookie: "tcc_attr_latest_campaign", property: "tcc_latest_utm_campaign" },
 ];
 
-function jsonResponse(body, status = 200, extraHeaders = {}) {
+function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "no-store",
-      ...extraHeaders,
     },
   });
-}
-
-function acceptanceCookie(accepted) {
-  return `${CONTACT_ACCEPTANCE_COOKIE}=${accepted ? "1" : ""}; Path=/; Max-Age=${accepted ? "60" : "0"}; SameSite=Lax; Secure`;
-}
-
-function getPreviewQaSimulation(request) {
-  let hostname = "";
-
-  try {
-    hostname = new URL(request.url).hostname;
-  } catch {
-    return "";
-  }
-
-  if (!hostname.endsWith(".pages.dev")) return "";
-
-  const requestedMode = (request.headers.get(QA_SIMULATION_HEADER) || "").trim();
-  return QA_SIMULATION_MODES.has(requestedMode) ? requestedMode : "";
 }
 
 function parseName(fullName) {
@@ -118,8 +90,7 @@ export async function onRequestPost({ request }) {
     if (!contentType.includes("application/json")) {
       return jsonResponse(
         { ok: false, accepted: false, outcome: "invalid_request", error: "Unsupported request format." },
-        415,
-        { "Set-Cookie": acceptanceCookie(false) }
+        415
       );
     }
 
@@ -135,8 +106,7 @@ export async function onRequestPost({ request }) {
     if (website) {
       return jsonResponse(
         { ok: true, accepted: false, outcome: "filtered" },
-        200,
-        { "Set-Cookie": acceptanceCookie(false) }
+        200
       );
     }
 
@@ -153,36 +123,7 @@ export async function onRequestPost({ request }) {
     ) {
       return jsonResponse(
         { ok: false, accepted: false, outcome: "invalid_request", error: "Please check the form fields and try again." },
-        400,
-        { "Set-Cookie": acceptanceCookie(false) }
-      );
-    }
-
-    // Deterministic runtime QA only. This branch-only hook is honored exclusively on
-    // Cloudflare Pages preview hosts and will be removed before the PR is merged.
-    const qaSimulation = getPreviewQaSimulation(request);
-    if (qaSimulation === "upstream_rejected") {
-      return jsonResponse(
-        { ok: false, accepted: false, outcome: "upstream_rejected", error: "The form could not be submitted." },
-        502,
-        { "Set-Cookie": acceptanceCookie(false) }
-      );
-    }
-
-    if (qaSimulation === "upstream_unavailable") {
-      return jsonResponse(
-        { ok: false, accepted: false, outcome: "upstream_unavailable", error: "The form could not be submitted." },
-        503,
-        { "Set-Cookie": acceptanceCookie(false) }
-      );
-    }
-
-    if (qaSimulation === "timeout") {
-      await new Promise((resolve) => setTimeout(resolve, 250));
-      return jsonResponse(
-        { ok: false, accepted: false, outcome: "timeout", error: "The form could not be submitted." },
-        503,
-        { "Set-Cookie": acceptanceCookie(false) }
+        400
       );
     }
 
@@ -250,15 +191,13 @@ export async function onRequestPost({ request }) {
 
       return jsonResponse(
         { ok: false, accepted: false, outcome, error: "The form could not be submitted." },
-        status,
-        { "Set-Cookie": acceptanceCookie(false) }
+        status
       );
     }
 
     return jsonResponse(
       { ok: true, accepted: true, outcome: "accepted" },
-      200,
-      { "Set-Cookie": acceptanceCookie(true) }
+      200
     );
   } catch (error) {
     const isTimeout = error instanceof Error && error.name === "AbortError";
@@ -274,8 +213,7 @@ export async function onRequestPost({ request }) {
         outcome: isTimeout ? "timeout" : "upstream_unavailable",
         error: "The form could not be submitted.",
       },
-      503,
-      { "Set-Cookie": acceptanceCookie(false) }
+      503
     );
   }
 }
@@ -283,7 +221,6 @@ export async function onRequestPost({ request }) {
 export function onRequest() {
   return jsonResponse(
     { ok: false, accepted: false, outcome: "method_not_allowed", error: "Method not allowed." },
-    405,
-    { "Set-Cookie": acceptanceCookie(false) }
+    405
   );
 }
