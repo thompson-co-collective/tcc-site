@@ -5,6 +5,7 @@ import { GlobalHeader } from "./components/GlobalHeader";
 import { GlobalFooter } from "./components/GlobalFooter";
 import { ExitIntentPopup } from "./components/ExitIntentPopup";
 import { FloatingCTA } from "./components/FloatingCTA";
+import { AttributionTracker } from "./components/AttributionTracker";
 import { PageViewTracker } from "./components/PageViewTracker";
 import { RouteMetaManager } from "./components/RouteMetaManager";
 
@@ -68,6 +69,7 @@ export default function App() {
           <SkipLink />
           <ScrollToTop />
           <RouteMetaManager />
+          <AttributionTracker />
           <PageViewTracker />
 
           <GlobalHeader />
