@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { CtaPair } from "../components/CtaPair";
 import logoStacked from "../../assets/logo-stacked.png";
+import ampersandWhite from "../../assets/ampersand-white.png";
 
 export default function HomePage() {
   useEffect(() => {
