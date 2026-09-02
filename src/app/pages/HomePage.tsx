@@ -124,7 +124,7 @@ export default function HomePage() {
             className="mb-8"
             style={{
               fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
-              fontWeight: 600,
+              fontWeight: 400,
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
               fontFamily: 'var(--font-serif)',
