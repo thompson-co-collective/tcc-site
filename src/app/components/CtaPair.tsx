@@ -16,7 +16,7 @@ interface CtaPairProps {
  * Standard dual-CTA — used in every hero and bottom-of-page section.
  * CTA 1: "Schedule a clarity call →"  →  /contact
  * CTA 2: Label can be tailored by page; destination defaults to /audit.
- * All CTAs use serif font per brand spec.
+ * CTAs use the sans-serif UI font so display typography stays reserved for headings.
  */
 export function CtaPair({
   variant = "light",
@@ -39,7 +39,7 @@ export function CtaPair({
         className="inline-flex items-center justify-center px-8 py-4 rounded transition-colors group"
         style={{
           minHeight: "56px",
-          fontFamily: "var(--font-serif)",
+          fontFamily: "var(--font-sans)",
           fontSize: "1.0625rem",
           fontWeight: 600,
           ...(isLight
@@ -68,7 +68,7 @@ export function CtaPair({
         className="inline-flex items-center justify-center px-6 py-4 rounded transition-colors"
         style={{
           minHeight: "56px",
-          fontFamily: "var(--font-serif)",
+          fontFamily: "var(--font-sans)",
           fontSize: "1.0625rem",
           fontWeight: 500,
           ...(isLight
