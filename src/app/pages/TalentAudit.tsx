@@ -626,7 +626,7 @@ export default function TalentAudit() {
                       color: 'rgba(255,255,255,0.9)',
                     }}
                   >
-                    <strong className="text-white">Get your talent attraction baseline in 5 minutes.</strong> Discover exactly what to fix first — no sales pitch, just actionable insights used by 200+ organizations.
+                    <strong className="text-white">Get your talent attraction baseline in 2 minutes.</strong> Discover exactly what to fix first — no sales pitch, just actionable insights.
                   </p>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="flex items-center gap-2 text-white/80">
@@ -635,7 +635,7 @@ export default function TalentAudit() {
                     </div>
                     <div className="flex items-center gap-2 text-white/80">
                       <span className="text-green-400">✓</span>
-                      <span className="text-sm">5-minute completion</span>
+                      <span className="text-sm">2-minute completion</span>
                     </div>
                     <div className="flex items-center gap-2 text-white/80">
                       <span className="text-green-400">✓</span>

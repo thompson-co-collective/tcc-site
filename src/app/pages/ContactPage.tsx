@@ -239,9 +239,6 @@ export default function ContactPage() {
                 <span>No sales pitch</span>
               </div>
             </div>
-            <p className="text-gray-500 text-sm">
-              Join 200+ organizations who've improved their hiring outcomes
-            </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

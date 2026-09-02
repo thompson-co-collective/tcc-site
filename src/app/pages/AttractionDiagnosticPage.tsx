@@ -156,7 +156,7 @@ export default function AttractionDiagnosticPage() {
     {
       question: "Is this the same as the baseline assessment?",
       answer:
-        "No. The baseline self-assessment at /audit is a 13-question self-scored tool you complete in under five minutes. The Attraction Diagnostic is a paid, facilitated engagement where we do the evidence work — reviewing your actual touchpoints, channels, claims, and candidate experience — and return a decision-ready package with findings and a prioritized plan.",
+        "No. The baseline self-assessment at /audit is a 13-question self-scored tool you complete in about two minutes. The Attraction Diagnostic is a paid, facilitated engagement where we do the evidence work — reviewing your actual touchpoints, channels, claims, and candidate experience — and return a decision-ready package with findings and a prioritized plan.",
     },
     {
       question: "Do you need full data access?",

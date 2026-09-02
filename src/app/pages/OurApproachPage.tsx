@@ -970,7 +970,7 @@ export default function OurApproachPage() {
                     color: 'rgba(255,255,255,0.9)',
                   }}
                 >
-                  Not ready for a diagnostic conversation yet? Get your baseline in five minutes. It's a 13-question self-assessment that shows where signal, conversion, and experience are breaking down — before you spend another dollar guessing.
+                  Not ready for a diagnostic conversation yet? Get your baseline in about two minutes. It's a 13-question self-assessment that shows where signal, conversion, and experience are breaking down — before you spend another dollar guessing.
                 </p>
                 <Link 
                   to="/audit"

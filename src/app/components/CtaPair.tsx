@@ -7,6 +7,7 @@ interface CtaPairProps {
   className?: string;
   layout?: "row" | "col";
   cta1Label?: string;
+  cta2Label?: string;
   cta1To?: string;
   cta2To?: string;
 }
@@ -14,7 +15,7 @@ interface CtaPairProps {
 /**
  * Standard dual-CTA — used in every hero and bottom-of-page section.
  * CTA 1: "Schedule a clarity call →"  →  /contact
- * CTA 2: "Get your baseline →"  →  /audit
+ * CTA 2: Label can be tailored by page; destination defaults to /audit.
  * All CTAs use serif font per brand spec.
  */
 export function CtaPair({
@@ -22,6 +23,7 @@ export function CtaPair({
   className = "",
   layout = "row",
   cta1Label = "Schedule a clarity call",
+  cta2Label = "Get your baseline",
   cta1To = "/contact",
   cta2To = "/audit",
 }: CtaPairProps) {
@@ -34,7 +36,7 @@ export function CtaPair({
       {/* CTA 1 — Primary */}
       <Link
         to={cta1To}
-        className="inline-flex items-center justify-center px-8 py-4 rounded transition-all hover:scale-105 hover:shadow-2xl relative group overflow-hidden"
+        className="inline-flex items-center justify-center px-8 py-4 rounded transition-colors group"
         style={{
           minHeight: "56px",
           fontFamily: "var(--font-serif)",
@@ -44,12 +46,10 @@ export function CtaPair({
             ? {
                 backgroundColor: "#FFFFFF",
                 color: "#0E5A6A",
-                boxShadow: "0 20px 50px rgba(255,255,255,0.15)",
               }
             : {
                 backgroundColor: "#117C92",
                 color: "#FFFFFF",
-                boxShadow: "0 20px 50px rgba(17,124,146,0.25)",
               }),
         }}
         data-cta-label="schedule_clarity_call"
@@ -60,13 +60,12 @@ export function CtaPair({
           {cta1Label}
           <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
         </span>
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
       </Link>
 
       {/* CTA 2 — Ghost */}
       <Link
         to={cta2To}
-        className="inline-flex items-center justify-center px-6 py-4 rounded transition-all relative overflow-hidden hover:scale-105"
+        className="inline-flex items-center justify-center px-6 py-4 rounded transition-colors"
         style={{
           minHeight: "56px",
           fontFamily: "var(--font-serif)",
@@ -90,7 +89,7 @@ export function CtaPair({
         data-cta-type="secondary"
       >
         <span className="flex items-center gap-1">
-          Get your baseline
+          {cta2Label}
           <ArrowRight size={16} />
         </span>
       </Link>

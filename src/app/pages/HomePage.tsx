@@ -2,9 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
-import { ServicesTicker } from "../components/ServicesTicker";
 import { CtaPair } from "../components/CtaPair";
-import ampersandWhite from "../../assets/ampersand-white.png";
 import logoStacked from "../../assets/logo-stacked.png";
 
 export default function HomePage() {
@@ -68,7 +66,7 @@ export default function HomePage() {
     },
     {
       question: "What do you need from us to get started with employer brand or recruitment marketing work?",
-      answer: "Not much to begin a conversation. We will want to understand your current hiring challenges, where you believe the gaps are, and what success looks like for your leadership. If you have existing brand assets, recruitment marketing campaign data, EVP documentation, or prior diagnostic work — bring it. If you do not have any of that yet, the baseline self-assessment is a structured starting point that establishes your talent attraction baseline in under five minutes. The first conversation is a diagnosis — we will tell you honestly what we see, where we think the highest-impact opportunities are, and whether Thompson & Co Collective is the right fit to address them."
+      answer: "Not much to begin a conversation. We will want to understand your current hiring challenges, where you believe the gaps are, and what success looks like for your leadership. If you have existing brand assets, recruitment marketing campaign data, EVP documentation, or prior diagnostic work — bring it. If you do not have any of that yet, the baseline self-assessment is a structured starting point that establishes your talent attraction baseline in about two minutes. The first conversation is a diagnosis — we will tell you honestly what we see, where we think the highest-impact opportunities are, and whether Thompson & Co Collective is the right fit to address them."
     }
   ];
 
@@ -78,128 +76,36 @@ export default function HomePage() {
       <section 
         id="talent-audit"
         className="relative pt-24 pb-20 md:pt-40 md:pb-32 overflow-hidden"
-                style={{
-          background: `
-            radial-gradient(
-              ellipse 60% 40% at 40% 50%,
-              rgba(17,124,146,0.10) 0%,
-              rgba(17,124,146,0.04) 35%,
-              transparent 70%
-            ),
-            linear-gradient(
-              180deg,
-              #0A1220 0%,
-              #0B1A2A 55%,
-              #0E5A6A 100%
-            )
-          `,
+        style={{
+          background: `radial-gradient(
+            ellipse 85% 65% at 68% 58%,
+            rgba(17,124,146,0.14) 0%,
+            rgba(17,124,146,0.08) 22%,
+            rgba(17,124,146,0.03) 40%,
+            rgba(17,124,146,0) 64%
+          ),
+          radial-gradient(
+            ellipse 120% 90% at 50% -10%,
+            rgba(255,255,255,0.04) 0%,
+            rgba(255,255,255,0.015) 18%,
+            rgba(255,255,255,0) 42%
+          ),
+          linear-gradient(
+            135deg,
+            #010308 0%,
+            #02050b 18%,
+            #040912 42%,
+            #08131d 68%,
+            #0d2a36 88%,
+            #123f4c 100%
+          )`,
           color: 'white',
-          isolation: 'isolate',
         }}
       >
-        {/* Hero Background Art — Ampersand Base Layer */}
-        <div
-          className="amp-base"
-          style={{
-            position: 'absolute',
-            right: '-45%',
-            top: '50%',
-            transform: 'translateY(-50%) rotate(18deg) scaleX(0.6825)',
-            width: 'min(2621px, 121.68vw)',
-            height: 'auto',
-            opacity: 0.14,
-            pointerEvents: 'none',
-            zIndex: 0,
-            filter: 'blur(0px)',
-            maskImage: 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.9) 60%, white 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.9) 60%, white 100%)',
-          }}
-          aria-hidden="true"
-        >
-          <img
-            src={ampersandWhite}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            fetchPriority="low"
-            sizes="(max-width: 768px) 177.84vw, 121.68vw"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-            }}
-            draggable={false}
-          />
-        </div>
-
-        {/* Mobile-specific ampersand adjustments */}
-        <style>{`
-          @media (max-width: 768px) {
-            .amp-base {
-              opacity: 0.18 !important;
-              right: -55% !important;
-              width: 177.84vw !important;
-              filter: blur(0px) !important;
-            }
-          }
-        `}</style>
-
-        {/* Optional subtle spotlight glow behind headline */}
-        <div 
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(17,124,146,0.15) 0%, rgba(17,124,146,0.05) 50%, transparent 70%)',
-            filter: 'blur(80px)',
-            zIndex: 0,
-          }}
-        />
-
-        {/* Static overlay — no animation */}
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(135deg, transparent 0%, rgba(17,124,146,0.08) 50%, transparent 100%)',
-            zIndex: 1,
-          }}
-        />
-
-        {/* Vignette effects */}
-        <div 
-          className="absolute top-0 left-0 right-0 h-40 pointer-events-none"
-          style={{
-            background: 'linear-gradient(180deg, rgba(10,18,32,0.5) 0%, transparent 100%)',
-            zIndex: 1,
-          }}
-        />
-
-        <div 
-          className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-          style={{
-            background: 'linear-gradient(0deg, rgba(14,90,106,0.4) 0%, transparent 100%)',
-            zIndex: 1,
-          }}
-        />
-
-        <div 
-          className="absolute top-0 left-0 bottom-0 w-32 pointer-events-none"
-          style={{
-            background: 'linear-gradient(90deg, rgba(10,18,32,0.3) 0%, transparent 100%)',
-            zIndex: 1,
-          }}
-        />
-
-        <div 
-          className="absolute top-0 right-0 bottom-0 w-32 pointer-events-none"
-          style={{
-            background: 'linear-gradient(270deg, rgba(10,18,32,0.3) 0%, transparent 100%)',
-            zIndex: 1,
-          }}
-        />
-
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" style={{ zIndex: 2 }}>
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Eyebrow - left aligned */}
           <div 
-            className="mb-6 animate-fadeInUpEyebrow"
+            className="mb-6"
             style={{
               fontFamily: 'var(--font-sans)',
               fontSize: '0.75rem',
@@ -209,7 +115,7 @@ export default function HomePage() {
               color: 'rgba(255,255,255,0.5)',
             }}
           >
-            Talent Attraction · Employer Brand · Recruitment Marketing
+            Employer Brand · Recruitment Marketing · Talent Strategy
           </div>
 
           {/* H1 - left aligned, large serif, with italic teal "Aligned." */}
@@ -223,11 +129,8 @@ export default function HomePage() {
               fontFamily: 'var(--font-serif)',
             }}
           >
-            <span className="animate-fadeInUpH1Main">
-              Talent. Brand. Experience.{' '}
-            </span>
+            <span>Talent. Brand. Experience.{' '}</span>
             <span 
-              className="animate-fadeInUpH1Aligned"
               style={{
                 color: '#117C92',
                 fontStyle: 'italic',
@@ -239,7 +142,7 @@ export default function HomePage() {
           
           {/* Subhead - left aligned, comfortable line length */}
           <p 
-            className="mb-12 text-white/80 max-w-2xl animate-fadeInUpSubhead"
+            className="mb-12 text-white/80 max-w-2xl"
             style={{
               fontSize: 'clamp(1.0625rem, 1.75vw, 1.1875rem)',
               lineHeight: 1.6,
@@ -247,99 +150,19 @@ export default function HomePage() {
               fontWeight: 400,
             }}
           >
-            Stop losing qualified candidates to unclear messaging and inconsistent experiences. 
-            <strong className="text-white">Get your talent attraction baseline in 5 minutes</strong> — 
-            then discover exactly what to fix first.
+            We align employer brand, recruitment marketing, and candidate experience so your story is credible, your spend is defensible, and the system holds after launch.
           </p>
 
           {/* CTA System */}
-          <div className="animate-fadeInCTA">
-            <CtaPair variant="light" />
-          </div>
-
-          {/* Urgency & Social Proof */}
-          <div className="mt-8 text-center animate-fadeInCTA" style={{ animationDelay: '0.2s' }}>
-            <p className="text-white/60 text-sm mb-2">
-              Join 200+ organizations who've improved their hiring outcomes
-            </p>
-            <div className="flex items-center justify-center gap-4 text-xs text-white/40">
-              <span>⚡ Free assessment</span>
-              <span>•</span>
-              <span>📊 Actionable insights</span>
-              <span>•</span>
-              <span>🎯 No sales pitch</span>
-            </div>
+          <div>
+            <CtaPair
+              variant="light"
+              cta1Label="Schedule a conversation"
+              cta2Label="Take the 2-minute audit"
+            />
           </div>
         </div>
-
-        {/* Animation styles */}
-        <style>{`
-          @keyframes fadeInUpCalm {
-            from {
-              opacity: 0;
-              transform: translateY(10px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes fadeInSimple {
-            from {
-              opacity: 0;
-            }
-            to {
-              opacity: 1;
-            }
-          }
-
-          /* Eyebrow: first element, 300ms */
-          .animate-fadeInUpEyebrow {
-            animation: fadeInUpCalm 300ms ease-out forwards;
-            opacity: 0;
-          }
-
-          /* H1 main text: starts after eyebrow (300ms), duration 300ms */
-          .animate-fadeInUpH1Main {
-            animation: fadeInUpCalm 300ms ease-out 300ms forwards;
-            opacity: 0;
-          }
-
-          /* "Aligned.": its own moment, starts after main H1 (600ms), slower 400ms */
-          .animate-fadeInUpH1Aligned {
-            animation: fadeInUpCalm 400ms ease-out 600ms forwards;
-            opacity: 0;
-          }
-
-          /* Subhead: 400ms delay from H1 completion (1000ms), duration 350ms */
-          .animate-fadeInUpSubhead {
-            animation: fadeInUpCalm 350ms ease-out 1000ms forwards;
-            opacity: 0;
-          }
-
-          /* CTAs: appear last, simple fade, no drift */
-          .animate-fadeInCTA {
-            animation: fadeInSimple 300ms ease-out 1200ms forwards;
-            opacity: 0;
-          }
-
-          @media (prefers-reduced-motion: reduce) {
-            .animate-fadeInUpEyebrow,
-            .animate-fadeInUpH1Main,
-            .animate-fadeInUpH1Aligned,
-            .animate-fadeInUpSubhead,
-            .animate-fadeInCTA {
-              animation: none;
-              opacity: 1;
-              transform: none;
-            }
-          }
-        `}</style>
       </section>
-
-      {/* Services Ticker */}
-      <ServicesTicker />
 
       {/* Market Reality Section */}
       <section className="py-20 md:py-28 bg-white">

@@ -6,16 +6,13 @@
 ## 1. HOME PAGE (`/`)
 
 ### SECTION 1 - HERO
-- **Eyebrow:** Talent Attraction · Employer Brand · Recruitment Marketing
+- **Eyebrow:** Employer Brand · Recruitment Marketing · Talent Strategy
 - **H1:** Talent. Brand. Experience. *Aligned.*
-- **Subhead:** We align your EVP, recruitment marketing, and candidate experience so your story holds up where it's evaluated first — in search, in AI, and in the room.
-- **CTA Primary:** Let's Connect
-- **CTA Secondary:** Take the Talent Audit
+- **Subhead:** We align employer brand, recruitment marketing, and candidate experience so your story is credible, your spend is defensible, and the system holds after launch.
+- **CTA Primary:** Schedule a conversation
+- **CTA Secondary:** Take the 2-minute audit
 
-### SECTION 2 - SERVICES TICKER
-(Animated scrolling ticker with service keywords)
-
-### SECTION 3 - MARKET REALITY
+### SECTION 2 - MARKET REALITY
 - **Eyebrow:** Market Reality
 - **H2:** Candidates are researching you before recruiters ever enter the conversation.
 - **Subhead:** The first version of your employer brand candidates see isn't your careers page. It's a search result. An AI summary. A Glassdoor snippet. If your narrative isn't governed across every touchpoint, the story degrades before you get to tell it.
@@ -37,14 +34,14 @@
 - **H3:** Governance isn't optional. It's the strategy.
 - **Body:** Make your narrative consistent, verifiable, and conversion-ready.
 
-### SECTION 4 - WHO WE ARE
+### SECTION 3 - WHO WE ARE
 - **Eyebrow:** Who We Are
 - **H2:** Enterprise expertise. Collective approach.
 - **Body:** Thompson & Co Collective is a boutique consultancy built on nearly two decades of experience inside complex talent and brand challenges. We bring together industry veterans — senior strategists, creatives, and recruitment marketers — and embed them where the work actually happens.
 - **Blockquote:** Not a large agency with overhead you pay for. Not a solo consultant without the bench. A collective — assembled around your problem, accountable to your outcomes.
 - **Link:** See our full methodology →
 
-### SECTION 5 - CAPABILITIES OVERVIEW
+### SECTION 4 - CAPABILITIES OVERVIEW
 - **H2:** Employer brand. Recruitment marketing. Candidate experience. Governed to outcomes.
 
 **Three Cards:**
@@ -63,7 +60,7 @@
 
 **Link:** See all capabilities →
 
-### SECTION 6 - OUTCOMES PROOF
+### SECTION 5 - OUTCOMES PROOF
 - **H2:** Proven outcomes. Real employers. Measurable results.
 
 **Four Stats Cards:**
@@ -72,7 +69,7 @@
 3. **20%** decrease in time-to-fill
 4. **Proprietary** employer brand operating framework
 
-### SECTION 7 - HOW WE'RE DIFFERENT
+### SECTION 6 - HOW WE'RE DIFFERENT
 - **H2:** How we're different from traditional agencies and solo consultants.
 
 **Five Accordion Items:**
@@ -82,7 +79,7 @@
 4. Built for governance, not just launch
 5. Transparent pricing with fixed-fee project structures
 
-### SECTION 8 - FAQ (AI-optimized with schema markup)
+### SECTION 7 - FAQ (AI-optimized with schema markup)
 - **H2:** Questions we hear from employers evaluating us.
 
 **8 FAQ Items:**
@@ -95,7 +92,7 @@
 7. How do you measure the success of employer brand and recruitment marketing work?
 8. What do you need from us to get started with employer brand or recruitment marketing work?
 
-### SECTION 9 - BOTTOM CTA
+### SECTION 8 - BOTTOM CTA
 - **Eyebrow:** Ready to Move Forward?
 - **H2:** Start with clarity. Not a sales pitch.
 - **Subhead:** The first conversation is a diagnosis — we'll tell you honestly where we think the gaps are, what success could look like, and whether Thompson & Co Collective is the right fit to close them.
@@ -353,7 +350,7 @@
 ### SECTION 1 - HERO
 - **Eyebrow:** DIAGNOSTIC TOOL
 - **H1:** Talent Maturity Audit
-- **Subhead:** 13 questions. 5 minutes. A clear baseline for where your talent attraction function stands — and where the highest-impact opportunities live.
+- **Subhead:** 13 questions. 2 minutes. A clear baseline for where your talent attraction function stands — and where the highest-impact opportunities live.
 
 ### SECTION 2 - AUDIT WIZARD
 (13-question diagnostic with 0/1/2 scoring using segmented controls)

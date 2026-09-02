@@ -7,9 +7,9 @@ import { ExitIntentPopup } from "./components/ExitIntentPopup";
 import { FloatingCTA } from "./components/FloatingCTA";
 import { PageViewTracker } from "./components/PageViewTracker";
 import { RouteMetaManager } from "./components/RouteMetaManager";
+import HomePage from "./pages/HomePage";
 
 // Lazy load pages for better performance
-const HomePage = lazy(() => import("./pages/HomePage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const PartnerPage = lazy(() => import("./pages/PartnerPage"));
 const CapabilitiesPage = lazy(() => import("./pages/CapabilitiesPage"));

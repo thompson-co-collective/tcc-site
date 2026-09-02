@@ -111,7 +111,7 @@ export function ExitIntentPopup() {
 
           {/* Subtext */}
           <p className="text-gray-600 mb-6 leading-relaxed">
-            Get a free 5-minute assessment of your talent attraction maturity.
+            Get a free 2-minute assessment of your talent attraction maturity.
             Discover exactly what to fix first — no sales pitch, just actionable insights.
           </p>
 
@@ -132,7 +132,7 @@ export function ExitIntentPopup() {
 
           {/* Trust signal */}
           <p className="text-xs text-gray-400 mt-4">
-            Used by 200+ organizations • Takes 5 minutes • No email required
+            Takes 2 minutes • No email required
           </p>
         </div>
       </div>
