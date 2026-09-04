@@ -3,7 +3,7 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
     react(),
     tailwindcss(),
@@ -19,12 +19,14 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Split vendor libraries
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['@radix-ui/react-accordion', 'lucide-react'],
-          utils: ['clsx', 'class-variance-authority'],
-        },
+        manualChunks: isSsrBuild
+          ? undefined
+          : {
+              // Split vendor libraries
+              vendor: ['react', 'react-dom', 'react-router-dom'],
+              ui: ['@radix-ui/react-accordion', 'lucide-react'],
+              utils: ['clsx', 'class-variance-authority'],
+            },
       },
     },
     // Enable compression
@@ -38,4 +40,4 @@ export default defineConfig({
     // Optimize chunks
     chunkSizeWarningLimit: 600,
   },
-})
+}))

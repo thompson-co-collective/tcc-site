@@ -1,1 +1,3 @@
 node_modules
+.seo-ssr
+.seo-routes.json
