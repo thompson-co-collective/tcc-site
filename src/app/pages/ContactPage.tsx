@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import { CheckCircle2, Clock } from "lucide-react";
 import { trackEvent } from "../lib/analytics";
 
+type ContactResponse = {
+  ok?: boolean;
+  accepted?: boolean;
+  outcome?: string;
+  error?: string;
+};
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -57,8 +64,15 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error(`Contact submission failed with status ${response.status}`);
+      let result: ContactResponse = {};
+      try {
+        result = await response.json();
+      } catch {
+        // A malformed or empty upstream response is never treated as accepted.
+      }
+
+      if (!response.ok || result.accepted !== true) {
+        throw new Error(`Contact submission was not accepted (${result.outcome || response.status})`);
       }
 
       trackEvent("contact_form_submitted", {
