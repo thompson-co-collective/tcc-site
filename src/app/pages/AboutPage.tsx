@@ -591,7 +591,6 @@ export default function AboutPage() {
             alt=""
             loading="lazy"
             decoding="async"
-            fetchPriority="low"
             sizes="45vw"
             style={{ width: "100%", height: "auto", display: "block" }}
             draggable={false}

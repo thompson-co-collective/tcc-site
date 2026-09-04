@@ -60,72 +60,78 @@ function PageLoader() {
   );
 }
 
-export default function App() {
+export function AppContent() {
   return (
     <HelmetProvider>
-      <Router>
-        <div className="min-h-screen bg-white">
-          <SkipLink />
-          <ScrollToTop />
-          <RouteMetaManager />
-          <PageViewTracker />
+      <div className="min-h-screen bg-white">
+        <SkipLink />
+        <ScrollToTop />
+        <RouteMetaManager />
+        <PageViewTracker />
 
-          <GlobalHeader />
+        <GlobalHeader />
 
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/capabilities" element={<CapabilitiesPage />} />
-              <Route path="/our-approach" element={<OurApproachPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/audit" element={<TalentAudit />} />
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/capabilities" element={<CapabilitiesPage />} />
+            <Route path="/our-approach" element={<OurApproachPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/audit" element={<TalentAudit />} />
 
-              {/* Redirect legacy URL */}
-              <Route path="/talent-maturity-audit" element={<Navigate to="/audit" replace />} />
+            {/* Client-side fallbacks; Cloudflare issues 301s for direct requests. */}
+            <Route path="/talent-maturity-audit" element={<Navigate to="/audit" replace />} />
 
-              <Route path="/attraction-diagnostic" element={<AttractionDiagnosticPage />} />
-              <Route path="/insights" element={<InsightsPage />} />
+            <Route path="/attraction-diagnostic" element={<AttractionDiagnosticPage />} />
+            <Route path="/insights" element={<InsightsPage />} />
 
-              <Route
-                path="/insights/why-employer-brands-fail"
-                element={<WhyEmployerBrandsFail />}
-              />
+            <Route
+              path="/insights/why-employer-brands-fail"
+              element={<WhyEmployerBrandsFail />}
+            />
 
-              <Route
-                path="/insights/job-board-strategy"
-                element={<TheQuietCollapseOfJobBoardStrategy />}
-              />
+            <Route
+              path="/insights/job-board-strategy"
+              element={<TheQuietCollapseOfJobBoardStrategy />}
+            />
 
-              <Route
-                path="/insights/talent-maturity-gap"
-                element={<MostCompaniesAreAtStageOne />}
-              />
+            <Route
+              path="/insights/talent-maturity-gap"
+              element={<MostCompaniesAreAtStageOne />}
+            />
 
-              <Route
-                path="/insights/hidden-cost-bad-hiring"
-                element={<TheHiddenCostOfBadHiring />}
-              />
+            <Route
+              path="/insights/hidden-cost-bad-hiring"
+              element={<TheHiddenCostOfBadHiring />}
+            />
 
-              <Route
-                path="/insights/ai-search-optimization"
-                element={<OptimizingForAISearch />}
-              />
+            <Route
+              path="/insights/ai-search-optimization"
+              element={<OptimizingForAISearch />}
+            />
 
-              <Route path="/blog" element={<Navigate to="/insights" replace />} />
-              <Route path="/partner" element={<PartnerPage />} />
-              <Route path="/privacy" element={<PrivacyPage />} />
-              <Route path="/terms" element={<TermsPage />} />
-              <Route path="/sitemap" element={<SitemapPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </Suspense>
+            <Route path="/blog" element={<Navigate to="/insights" replace />} />
+            <Route path="/partner" element={<PartnerPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/sitemap" element={<SitemapPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
 
-          <GlobalFooter />
-          <ExitIntentPopup />
-          <FloatingCTA />
-        </div>
-      </Router>
+        <GlobalFooter />
+        <ExitIntentPopup />
+        <FloatingCTA />
+      </div>
     </HelmetProvider>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }

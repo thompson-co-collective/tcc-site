@@ -4,7 +4,10 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "npm run build:client && npm run build:ssr && node scripts/prerender.mjs && node scripts/verify-seo-build.mjs",
+    "build:client": "vite build",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir .seo-ssr",
+    "verify:seo": "node scripts/verify-seo-build.mjs",
     "dev": "vite"
   },
   "dependencies": {

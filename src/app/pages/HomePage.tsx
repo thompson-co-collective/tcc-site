@@ -1510,7 +1510,6 @@ export default function HomePage() {
             alt=""
             loading="lazy"
             decoding="async"
-            fetchPriority="low"
             sizes="78vw"
             style={{
               width: '100%',
