@@ -3,12 +3,21 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { CtaPair } from "../components/CtaPair";
 
+import { recruitmentMarketingInsight } from "../seo/recruitmentMarketingInsight";
+
 export default function InsightsPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const contentCards = [
+    {
+      category: recruitmentMarketingInsight.category,
+      headline: recruitmentMarketingInsight.headline,
+      description: recruitmentMarketingInsight.summary,
+      link: recruitmentMarketingInsight.path,
+      comingSoon: false,
+    },
     {
       category: "EMPLOYER BRAND",
       headline: "Why Most Employer Brands Fail Before They Launch",
@@ -19,7 +28,7 @@ export default function InsightsPage() {
     {
       category: "RECRUITMENT MARKETING",
       headline: "The Quiet Collapse of the Job Board Strategy",
-      description: "Organizations are spending more on job distribution and getting fewer qualified applicants. The data is consistent. The cause is structural, not cyclical. What's actually happening — and what replaces it.",
+      description: "Job boards still matter. See how employer brand, career content, and candidate experience build the interest that job postings help convert.",
       link: "/insights/job-board-strategy",
       comingSoon: false,
     },

@@ -1,3 +1,5 @@
+import { recruitmentMarketingInsight } from "./recruitmentMarketingInsight";
+
 export const SITE_URL = "https://thompsoncollective.co";
 export const SOCIAL_IMAGE_URL = `${SITE_URL}/logo.png`;
 
@@ -44,6 +46,11 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
     description:
       "Perspectives, research, and practical guidance on employer brand, recruitment marketing, and talent attraction strategy.",
   },
+  [recruitmentMarketingInsight.path]: {
+    title: recruitmentMarketingInsight.seoTitle,
+    description: recruitmentMarketingInsight.description,
+    ogType: "article",
+  },
   "/insights/why-employer-brands-fail": {
     title: "Why Most Employer Brands Fail Before They Launch | Thompson & Co Collective",
     description:
@@ -53,7 +60,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   "/insights/job-board-strategy": {
     title: "The Quiet Collapse of the Job Board Strategy | Thompson & Co Collective",
     description:
-      "Why job board-heavy hiring strategies are underperforming and what modern recruitment marketing systems should replace them.",
+      "How job boards capture candidate demand and how employer brand, career content, and candidate experience build interest before the application.",
     ogType: "article",
   },
   "/insights/talent-maturity-gap": {

@@ -1,3 +1,4 @@
+import { recruitmentMarketingInsight } from "./seo/recruitmentMarketingInsight";
 import { useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -21,6 +22,7 @@ const TermsPage = lazy(() => import("./pages/TermsPage"));
 const SitemapPage = lazy(() => import("./pages/SitemapPage"));
 const TalentAudit = lazy(() => import("./pages/TalentAudit"));
 const AttractionDiagnosticPage = lazy(() => import("./pages/AttractionDiagnosticPage"));
+const RecruitmentMarketingStrategy = lazy(() => import("./pages/insights/RecruitmentMarketingStrategy"));
 const WhyEmployerBrandsFail = lazy(() => import("./pages/insights/WhyEmployerBrandsFail"));
 const TheQuietCollapseOfJobBoardStrategy = lazy(() => import("./pages/insights/TheQuietCollapseOfJobBoardStrategy"));
 const MostCompaniesAreAtStageOne = lazy(() => import("./pages/insights/MostCompaniesAreAtStageOne"));
@@ -85,6 +87,7 @@ export function AppContent() {
 
             <Route path="/attraction-diagnostic" element={<AttractionDiagnosticPage />} />
             <Route path="/insights" element={<InsightsPage />} />
+            <Route path={recruitmentMarketingInsight.path} element={<RecruitmentMarketingStrategy />} />
 
             <Route
               path="/insights/why-employer-brands-fail"
