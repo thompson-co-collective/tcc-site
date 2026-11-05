@@ -47,7 +47,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
       "Perspectives, research, and practical guidance on employer brand, recruitment marketing, and talent attraction strategy.",
   },
   [recruitmentMarketingInsight.path]: {
-    title: recruitmentMarketingInsight.seoTitle,
+    title: recruitmentMarketingInsight.headline,
     description: recruitmentMarketingInsight.description,
     ogType: "article",
   },

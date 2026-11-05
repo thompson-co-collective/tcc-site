@@ -88,6 +88,7 @@ export function AppContent() {
             <Route path="/attraction-diagnostic" element={<AttractionDiagnosticPage />} />
             <Route path="/insights" element={<InsightsPage />} />
             <Route path={recruitmentMarketingInsight.path} element={<RecruitmentMarketingStrategy />} />
+            <Route path={recruitmentMarketingInsight.legacyPath} element={<Navigate to={recruitmentMarketingInsight.path} replace />} />
 
             <Route
               path="/insights/why-employer-brands-fail"

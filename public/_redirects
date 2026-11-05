@@ -3,5 +3,7 @@
 /talent-maturity-audit /audit 301
 /tag/featured /insights 301
 /tag/featured/ /insights 301
+/insights/recruitment-marketing-strategy-job-ad-spend /insights/recruitment-marketing-performance-beyond-cost-per-application 301
+/insights/recruitment-marketing-strategy-job-ad-spend/ /insights/recruitment-marketing-performance-beyond-cost-per-application 301
 /sitemap.xml /sitemap.xml 200
 /robots.txt /robots.txt 200
