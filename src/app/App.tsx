@@ -22,6 +22,7 @@ const TermsPage = lazy(() => import("./pages/TermsPage"));
 const SitemapPage = lazy(() => import("./pages/SitemapPage"));
 const TalentAudit = lazy(() => import("./pages/TalentAudit"));
 const AttractionDiagnosticPage = lazy(() => import("./pages/AttractionDiagnosticPage"));
+const WhatIsRecruitmentMarketing = lazy(() => import("./pages/insights/WhatIsRecruitmentMarketing"));
 const RecruitmentMarketingStrategy = lazy(() => import("./pages/insights/RecruitmentMarketingStrategy"));
 const WhyEmployerBrandsFail = lazy(() => import("./pages/insights/WhyEmployerBrandsFail"));
 const TheQuietCollapseOfJobBoardStrategy = lazy(() => import("./pages/insights/TheQuietCollapseOfJobBoardStrategy"));
@@ -87,6 +88,7 @@ export function AppContent() {
 
             <Route path="/attraction-diagnostic" element={<AttractionDiagnosticPage />} />
             <Route path="/insights" element={<InsightsPage />} />
+            <Route path="/insights/what-is-recruitment-marketing" element={<WhatIsRecruitmentMarketing />} />
             <Route path={recruitmentMarketingInsight.path} element={<RecruitmentMarketingStrategy />} />
             <Route path={recruitmentMarketingInsight.legacyPath} element={<Navigate to={recruitmentMarketingInsight.path} replace />} />
 

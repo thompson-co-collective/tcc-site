@@ -1,3 +1,4 @@
+import { recruitmentMarketingGuide } from "../seo/recruitmentMarketingGuide";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -11,6 +12,13 @@ export default function InsightsPage() {
   }, []);
 
   const contentCards = [
+    {
+      category: recruitmentMarketingGuide.category,
+      headline: recruitmentMarketingGuide.headline,
+      description: recruitmentMarketingGuide.summary,
+      link: recruitmentMarketingGuide.path,
+      comingSoon: false,
+    },
     {
       category: recruitmentMarketingInsight.category,
       headline: recruitmentMarketingInsight.headline,

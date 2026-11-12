@@ -74,7 +74,8 @@ export default function RecruitmentMarketingStrategy() {
         </div>
 
         <aside className="mt-12 border-t border-gray-200 pt-6" aria-label="Related insight">
-          <p className="mb-2 text-sm font-medium text-gray-600">Related insight</p>
+          <p className="mb-2 text-sm font-medium text-gray-600">Related insights</p>
+          <p className="mb-3"><Link className={sourceLink} to="/insights/what-is-recruitment-marketing">What Is Recruitment Marketing? Strategy, Examples, and Metrics</Link></p>
           <Link className={sourceLink} to="/insights/job-board-strategy">The Quiet Collapse of the Job Board Strategy</Link>
         </aside>
       </article>

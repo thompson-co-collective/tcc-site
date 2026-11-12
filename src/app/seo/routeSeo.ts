@@ -1,3 +1,4 @@
+import { recruitmentMarketingGuide } from "./recruitmentMarketingGuide";
 import { recruitmentMarketingInsight } from "./recruitmentMarketingInsight";
 
 export const SITE_URL = "https://thompsoncollective.co";
@@ -45,6 +46,11 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
     title: "Insights | The Collective POV | Thompson & Co Collective",
     description:
       "Perspectives, research, and practical guidance on employer brand, recruitment marketing, and talent attraction strategy.",
+  },
+  [recruitmentMarketingGuide.path]: {
+    title: recruitmentMarketingGuide.title,
+    description: recruitmentMarketingGuide.description,
+    ogType: "article",
   },
   [recruitmentMarketingInsight.path]: {
     title: recruitmentMarketingInsight.headline,
