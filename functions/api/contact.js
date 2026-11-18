@@ -123,8 +123,26 @@ export async function onRequestPost({ request }) {
     });
 
     if (!hubspotResponse.ok) {
+      // Log only validation metadata; never log submitted names, emails, or message text.
+      let diagnostics = {};
+      try {
+        const errorBody = await hubspotResponse.json();
+        diagnostics = {
+          category: errorBody.category || null,
+          errorType: errorBody.errorType || null,
+          errors: Array.isArray(errorBody.errors)
+            ? errorBody.errors.map((item) => ({
+                errorType: item.errorType || null,
+                fieldName: item.fieldName || item.name || null,
+              }))
+            : [],
+        };
+      } catch {
+        diagnostics = { parseError: true };
+      }
       console.error("HubSpot form submission failed", {
         status: hubspotResponse.status,
+        ...diagnostics,
       });
       return jsonResponse({ error: "The form could not be submitted." }, 502);
     }
