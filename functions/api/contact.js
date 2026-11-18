@@ -62,10 +62,9 @@ export async function onRequestPost({ request }) {
     const message = typeof body.message === "string" ? body.message.trim() : "";
     const website = typeof body.website === "string" ? body.website.trim() : "";
 
-    // Honeypot: legitimate visitors never see or fill this field.
-    if (website) {
-      return jsonResponse({ ok: true });
-    }
+    // Ignore the legacy hidden website field: some browsers autofill it,
+    // and silently returning success can discard legitimate inquiries.
+    void website;
 
     if (
       !name ||
@@ -152,6 +151,7 @@ export async function onRequestPost({ request }) {
       return jsonResponse({ error: "The form could not be submitted." }, 502);
     }
 
+    console.log("HubSpot contact form accepted", { status: hubspotResponse.status });
     return jsonResponse({ ok: true });
   } catch (error) {
     console.error("Contact form handler failed", {
