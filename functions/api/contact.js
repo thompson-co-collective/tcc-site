@@ -1,15 +1,14 @@
 const HUBSPOT_PORTAL_ID = "244175001";
-const HUBSPOT_FORM_ID = "01b8a813-169f-4b61-835a-5b556228bbb4";
+const HUBSPOT_FORM_ID = "8250ec16-527c-4b18-b8ab-acb1d53140ec";
 const HUBSPOT_SUBMIT_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`;
 
 const SERVICE_NEEDS = new Set([
-  "funnel-conversion",
-  "candidate-experience",
-  "employer-brand",
-  "recruitment-marketing",
-  "ai-governance",
-  "vendor-governance",
-  "not-sure",
+  "talent-attraction-hiring",
+  "employer-brand-positioning",
+  "recruitment-marketing-advertising",
+  "technology-data-analytics",
+  "strategic-consulting-advisory",
+  "other-not-sure",
 ]);
 
 function jsonResponse(body, status = 200) {
@@ -86,7 +85,7 @@ export async function onRequestPost({ request }) {
     const fields = [
       { objectTypeId: "0-1", name: "firstname", value: firstName },
       { objectTypeId: "0-1", name: "email", value: email },
-      { objectTypeId: "0-2", name: "name", value: company },
+      { objectTypeId: "0-1", name: "company", value: company },
       { objectTypeId: "0-1", name: "service_need", value: needHelp },
     ];
 
