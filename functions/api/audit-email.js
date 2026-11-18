@@ -1,4 +1,5 @@
 const HUBSPOT_PORTAL_ID = "244175001";
+const HUBSPOT_FORM_ID = "f6b76910-d408-4fba-b6a6-cf17b1f845e6";
 const VALID_BANDS = new Map([
   ["Nascent", "nascent"],
   ["Developing", "developing"],
@@ -24,7 +25,7 @@ function getCookie(request, name) {
   return "";
 }
 
-export async function onRequestPost({ request, env }) {
+export async function onRequestPost({ request }) {
   try {
     if (!(request.headers.get("Content-Type") || "").includes("application/json")) {
       return jsonResponse({ error: "Unsupported request format." }, 415);
@@ -54,12 +55,6 @@ export async function onRequestPost({ request, env }) {
       return jsonResponse({ error: "Please check your email and audit results." }, 400);
     }
 
-    const formId = env?.HUBSPOT_AUDIT_EMAIL_FORM_GUID;
-    if (!formId || !/^[a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12}$/i.test(formId)) {
-      console.error("Audit results form ID is not configured");
-      return jsonResponse({ error: "Results delivery is temporarily unavailable." }, 503);
-    }
-
     const context = {
       pageName: "Talent Maturity Audit – Thompson & Co Collective",
       pageUri: "https://thompsoncollective.co/audit",
@@ -70,7 +65,7 @@ export async function onRequestPost({ request, env }) {
     if (ipAddress) context.ipAddress = ipAddress;
 
     const response = await fetch(
-      `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}`,
+      `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
