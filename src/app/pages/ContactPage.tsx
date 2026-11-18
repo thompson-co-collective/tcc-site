@@ -402,7 +402,7 @@ export default function ContactPage() {
                   color: '#0A1220',
                 }}
               >
-                What do you need help with? <span style={{ color: '#117C92' }}>*</span>
+                How can we help? <span style={{ color: '#117C92' }}>*</span>
               </label>
               <select
                 id="needHelp"
@@ -420,14 +420,13 @@ export default function ContactPage() {
                   fontSize: '0.9375rem',
                 }}
               >
-                <option value="">Select an option</option>
-                <option value="funnel-conversion">Talent funnel conversion / drop-off</option>
-                <option value="candidate-experience">Candidate experience (apply → offer)</option>
-                <option value="employer-brand">Employer brand clarity / EVP system</option>
-                <option value="recruitment-marketing">Recruitment marketing assets (job ads, careers page, outreach)</option>
-                <option value="ai-governance">AI-safe messaging / governance</option>
-                <option value="vendor-governance">Vendor / media governance</option>
-                <option value="not-sure">Not sure yet (diagnose)</option>
+                <option value="">Select what best fits your needs</option>
+                <option value="talent-attraction-hiring">Talent Attraction & Hiring</option>
+                <option value="employer-brand-positioning">Employer Brand & Positioning</option>
+                <option value="recruitment-marketing-advertising">Recruitment Marketing & Advertising</option>
+                <option value="technology-data-analytics">Technology, Data & Analytics</option>
+                <option value="strategic-consulting-advisory">Strategic Consulting & Advisory</option>
+                <option value="other-not-sure">Something Else / Not Sure Yet</option>
               </select>
               {errors.needHelp && (
                 <p id="needHelp-error" role="alert" style={{ color: '#EF4444', fontSize: '0.875rem', marginTop: '0.5rem', fontFamily: 'var(--font-sans)' }}>
@@ -448,7 +447,7 @@ export default function ContactPage() {
                   color: '#0A1220',
                 }}
               >
-                Tell us more (optional)
+                Anything else you'd like us to know?
               </label>
               <textarea
                 id="message"
@@ -463,7 +462,7 @@ export default function ContactPage() {
                   fontSize: '0.9375rem',
                   resize: 'vertical',
                 }}
-                placeholder="Share any context that helps us understand where you are and what you're trying to solve."
+                placeholder="Share relevant context, priorities, or timing."
               />
             </div>
 
