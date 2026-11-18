@@ -62,9 +62,10 @@ export async function onRequestPost({ request }) {
     const message = typeof body.message === "string" ? body.message.trim() : "";
     const website = typeof body.website === "string" ? body.website.trim() : "";
 
-    // Ignore the legacy hidden website field: some browsers autofill it,
-    // and silently returning success can discard legitimate inquiries.
-    void website;
+    // Honeypot: legitimate visitors never see or fill this field.
+    if (website) {
+      return jsonResponse({ ok: true });
+    }
 
     if (
       !name ||
