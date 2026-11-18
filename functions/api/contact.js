@@ -86,6 +86,7 @@ export async function onRequestPost({ request }) {
       { objectTypeId: "0-1", name: "firstname", value: firstName },
       { objectTypeId: "0-1", name: "email", value: email },
       { objectTypeId: "0-1", name: "company", value: company },
+      { objectTypeId: "0-2", name: "name", value: company },
       { objectTypeId: "0-1", name: "service_need", value: needHelp },
     ];
 
