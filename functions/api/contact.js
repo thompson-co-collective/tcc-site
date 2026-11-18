@@ -134,6 +134,10 @@ export async function onRequestPost({ request }) {
             ? errorBody.errors.map((item) => ({
                 errorType: item.errorType || null,
                 fieldName: item.fieldName || item.name || null,
+                // REQUIRED_FIELD messages identify schema fields; strip any email-like strings.
+                detail: item.errorType === "REQUIRED_FIELD"
+                  ? String(item.message || "").replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}/gi, "[redacted]").slice(0, 300)
+                  : null,
               }))
             : [],
         };
