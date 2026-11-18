@@ -74,23 +74,23 @@ function resultsEmail(score, band) {
   const label = band.charAt(0).toUpperCase() + band.slice(1);
   const priorities = data.priorities.map((item) => "<li style=\"margin-bottom:10px\">" + escapeHtml(item) + "</li>").join("");
   const next = data.next.map((item) => "<li style=\"margin-bottom:10px\">" + escapeHtml(item) + "</li>").join("");
-  const html = \`<!doctype html><html><body style="margin:0;padding:32px 16px;background:#f5f7f8;color:#14212d;font-family:Arial,sans-serif">
+  const html = `<!doctype html><html><body style="margin:0;padding:32px 16px;background:#f5f7f8;color:#14212d;font-family:Arial,sans-serif">
 <div style="max-width:620px;margin:auto;background:#fff;padding:36px;border:1px solid #dbe4e8">
 <p style="font-size:14px;letter-spacing:1px;color:#0e7185">THOMPSON &amp; CO COLLECTIVE</p>
 <h1 style="font-size:28px;font-weight:normal;margin:24px 0 8px">Your Talent Maturity Audit baseline</h1>
 <p>Your assessment results are ready. This is a directional baseline, not a benchmark against other employers.</p>
 <div style="background:#eaf4f6;padding:22px;margin:24px 0"><div style="font-size:14px">Audit score</div>
-<div style="font-size:32px;margin:6px 0">\${score} / 26</div><div style="font-size:18px">Maturity band: \${label}</div></div>
-<h2 style="font-size:20px">What this means</h2><p>\${escapeHtml(data.meaning)}</p>
-<h2 style="font-size:20px">Your top three priorities</h2><ol>\${priorities}</ol>
-<h2 style="font-size:20px">Next three considerations</h2><ul>\${next}</ul>
+<div style="font-size:32px;margin:6px 0">${score} / 26</div><div style="font-size:18px">Maturity band: ${label}</div></div>
+<h2 style="font-size:20px">What this means</h2><p>${escapeHtml(data.meaning)}</p>
+<h2 style="font-size:20px">Your top three priorities</h2><ol>${priorities}</ol>
+<h2 style="font-size:20px">Next three considerations</h2><ul>${next}</ul>
 <p style="margin-top:28px">If you would like to discuss where to begin, you can <a style="color:#0e7185" href="https://calendly.com/candice-thompsoncollective/clarity-call">book a clarity call</a>.</p>
-<p style="font-size:12px;color:#596770;border-top:1px solid #dbe4e8;padding-top:20px;margin-top:32px">You requested this copy of your audit results at thompsoncollective.co/audit. This email is not a marketing subscription.</p></div></body></html>\`;
+<p style="font-size:12px;color:#596770;border-top:1px solid #dbe4e8;padding-top:20px;margin-top:32px">You requested this copy of your audit results at thompsoncollective.co/audit. This email is not a marketing subscription.</p></div></body></html>`;
   const text = [
     "Your Talent Maturity Audit baseline — Thompson & Co Collective",
-    \`Score: \${score} / 26 | Maturity band: \${label}\`,
+    `Score: ${score} / 26 | Maturity band: ${label}`,
     "What this means: " + data.meaning,
-    "Your top three priorities:", ...data.priorities.map((x, i) => \`\${i + 1}. \${x}\`),
+    "Your top three priorities:", ...data.priorities.map((x, i) => `${i + 1}. ${x}`),
     "Next three considerations:", ...data.next.map((x) => "- " + x),
     "Discuss your next step: https://calendly.com/candice-thompsoncollective/clarity-call",
     "You requested this copy at thompsoncollective.co/audit. This is not a marketing subscription.",
